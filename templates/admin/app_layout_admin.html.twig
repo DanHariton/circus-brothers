@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <meta type="description" content="{% block meta_description %}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="author" content="OSFL">
+    {% block css %}
+        <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ asset('admin/admin.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    {% endblock %}
+</head>
+<body>
+
+{% block body %}{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('admin/admin.js') }}"></script>
+{% endblock %}
+</body>
+</html>

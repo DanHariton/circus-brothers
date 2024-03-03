@@ -1,0 +1,20 @@
+{% extends 'admin/app_layout_admin.html.twig' %}
+
+{% block body %}
+    <div class="sb-nav-fixed">
+        {% include 'admin/components/navbar.html.twig' %}
+
+        <div id="layoutSidenav">
+            {% include 'admin/components/sidebar.html.twig' %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        {% block content %}{% endblock %}
+                    </div>
+                </main>
+            </div>
+        </div>
+
+{#        {% include 'admin/security/logout.html.twig' %}#}
+    </div>
+{% endblock %}

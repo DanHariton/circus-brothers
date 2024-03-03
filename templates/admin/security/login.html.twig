@@ -1,0 +1,32 @@
+{% extends 'admin/app_layout_admin.html.twig' %}
+
+{% block title %}OSFL | Login{% endblock %}
+
+{% block body %}
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
+                                    <h3 class="text-center mt-2">Circus Brother</h3>
+                                    <h4 class="text-center mb-2">Login</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ form_start(loginForm) }}
+                                    {{ form_row(loginForm.email) }}
+                                    {{ form_row(loginForm.password) }}
+                                    {{ form_row(loginForm.csrfToken) }}
+                                    {{ form_row(loginForm.submit, {attr: {class: 'w-100 btn btn-primary'}}) }}
+                                    {{ form_end(loginForm) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
