@@ -1,0 +1,21 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}{{ "concert.create"|trans }}{% endblock %}
+
+{% block content %}
+    <h1 class="mt-4">{{ "concert.create"|trans }}</h1>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        <div class="card-body">
+            {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.location) }}
+                {{ form_row(form.tickets) }}
+                {{ form_row(form.active) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

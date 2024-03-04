@@ -1,19 +1,49 @@
 {% extends 'admin/components/layout.html.twig' %}
 
-{% block title %}Přidat novy concert{% endblock %}
+{% block title %}{{ "concert.list"|trans }}{% endblock %}
 
 {% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>{{ "concert.list"|trans }}</h1>
+        <a class="btn btn-primary" href="{{ path('concert_create') }}">{{ "concert.button.create"|trans }}</a>
+    </div>
+
     {% include 'admin/components/flashes.html.twig' %}
 
-    <a class="btn btn-info btn-sm mb-3" href="">Zpět</a>
-
-    <h1 class="h3 mb-2 text-gray-800">
-        Přidat novy event
-    </h1>
-
-    <div class="card shadow mb-4">
+    <div class="card mb-4">
         <div class="card-body">
-           WHAHAHAHHAAHH
+            <div class="table-responsive">
+                <table id="datatablesSimple" class="table table-striped text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{{ "concert.table.name"|trans }}</th>
+                        <th>{{ "concert.table.date"|trans }}</th>
+                        <th>{{ "concert.table.location"|trans }}</th>
+                        <th>{{ "concert.table.active"|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for concert in concerts %}
+                        <tr>
+                            <td>{{ concert.id }}</td>
+                            <td>{{ concert.name }}</td>
+                            <td>{{ concert.date|date("d.m.Y") }}</td>
+                            <td>{% if concert.active %}{{ "concert.active"|trans }}{% else %}{{ "concert.not_active"|trans }}{% endif %}</td>
+                            <td>
+                                <a href="{{ path('concert_edit', {'concert': concert.id}) }}" class="btn btn-primary btn-sm">{{ "concert.button.edit"|trans }}</a>
+                                <a href="{{ path('concert_toggle_status', {'concert': concert.id}) }}" class="btn btn-info btn-sm">{{ "concert.button.toggle_status"|trans }}</a>
+                                <a onclick="return confirm('Opravdu chcete smazat tento koncert?')"
+                                   href="{{ path('concert_delete', {'concert': concert.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    {{ "concert.button.delete"|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}

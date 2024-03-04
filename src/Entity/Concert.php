@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
 class Concert
 {
+    public const STATUS_ACTIVE = true;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -25,6 +27,12 @@ class Concert
 
     #[ORM\Column(length: 255)]
     private ?string $tickets = null;
+
+    #[ORM\Column]
+    private ?bool $active = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $changed = null;
 
     public function getId(): ?int
     {
@@ -75,6 +83,30 @@ class Concert
     public function setTickets(string $tickets): static
     {
         $this->tickets = $tickets;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getChanged(): ?\DateTimeInterface
+    {
+        return $this->changed;
+    }
+
+    public function setChanged(\DateTimeInterface $changed): static
+    {
+        $this->changed = $changed;
 
         return $this;
     }
