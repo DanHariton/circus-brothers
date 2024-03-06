@@ -21,6 +21,7 @@
                         <th>{{ "concert.table.date"|trans }}</th>
                         <th>{{ "concert.table.location"|trans }}</th>
                         <th>{{ "concert.table.active"|trans }}</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ concert.id }}</td>
                             <td>{{ concert.name }}</td>
+                            <td>{{ concert.location }}</td>
                             <td>{{ concert.date|date("d.m.Y") }}</td>
                             <td>{% if concert.active %}{{ "concert.active"|trans }}{% else %}{{ "concert.not_active"|trans }}{% endif %}</td>
                             <td>

@@ -24,18 +24,19 @@ class Merch
     #[ORM\Column]
     private ?bool $active = null;
 
-    /**
-     * @var Collection<int, Size>
-     */
+    #[ORM\OneToMany(targetEntity: File::class, mappedBy: "merch")]
+    private Collection $photos;
+
     #[ORM\JoinTable(name: 'merchs_sizes')]
-    #[ORM\JoinColumn(name: 'merch_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'size_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'merch_id', referencedColumnName: 'id', onDelete: "CASCADE")]
+    #[ORM\InverseJoinColumn(name: 'size_id', referencedColumnName: 'id', onDelete: "CASCADE")]
     #[ORM\ManyToMany(targetEntity: Size::class)]
     private Collection $sizes;
 
     public function __construct()
     {
         $this->sizes = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,5 +110,101 @@ class Merch
         $this->sizes->removeElement($size);
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, File>
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param File $file
+     * @return $this
+     */
+    public function addPhoto(File $file): self
+    {
+        if (!$this->photos->contains($file)) {
+            $this->photos[] = $file;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param File $file
+     * @return $this
+     */
+    public function removePhoto(File $file): self
+    {
+        $this->photos->removeElement($file);
+
+        return $this;
+    }
+
+    /**
+     * @return array|File[]
+     */
+    public function getOrderedImages(): array
+    {
+        $images = $this->photos->getValues();
+
+        usort($images, function (File $left, File $right) {
+            return $left->getPosition() <=> $right->getPosition();
+        });
+
+        return array_values($images);
+    }
+
+    public function getOrderedImagesPaths(): array
+    {
+        return array_map(function (File $file) {
+            return $file->getFileName();
+        }, $this->getOrderedImages());
+    }
+
+    public function getPreview(): ?string
+    {
+        return $this->getOrderedImagesPaths()[0] ?? null;
+    }
+
+    public function getMaxOrder(): int
+    {
+        $orders = array_map(function (File $file) {
+            return $file->getOrder();
+        }, $this->photos->getValues());
+
+        if (empty($orders)) {
+            return 1;
+        }
+
+        return max($orders) + 1;
+    }
+
+    public function reorder(File $file, $way): void
+    {
+        $orderedImages = $this->getOrderedImages();
+        $maxOrder = count($orderedImages);
+        foreach ($orderedImages as $index => $image) {
+            if ($image->getId() === $file->getId()) {
+                $index += $way;
+            }
+            $index = $index === $maxOrder ? $index - 1 : $index;
+            $index = $index === -1 ? 0 : $index;
+            $image->setPosition($index);
+        }
+
+        foreach ($orderedImages as $index => $image) {
+            if ($index > 0 && $orderedImages[$index-1]->getOrder() === $image->getPosition()) {
+                if ($way === 1) {
+                    $image->setPosition($image->getPosition() - 1);
+                }
+                if ($way === -1) {
+                    $orderedImages[$index-1]->setPosition($image->getPosition() + 1);
+                }
+            }
+        }
     }
 }

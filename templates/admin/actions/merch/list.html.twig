@@ -1,0 +1,53 @@
+{% extends 'admin/components/layout.html.twig' %}
+
+{% block title %}{{ "merch.list"|trans }}{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>{{ "merch.list"|trans }}</h1>
+        <a class="btn btn-primary" href="{{ path('merch_create') }}">{{ "merch.button.create"|trans }}</a>
+    </div>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatablesSimple" class="table table-striped text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>{{ "merch.table.name"|trans }}</th>
+                        <th>{{ "merch.table.price"|trans }}</th>
+                        <th>{{ "merch.table.size"|trans }}</th>
+                        <th>{{ "merch.table.active"|trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for merch in merchs %}
+                        <tr>
+                            <td>{{ merch.name }}</td>
+                            <td>{{ merch.price|format_currency('CZK', {fraction_digit: 0}) }}</td>
+                            <td>
+                                {% for size in merch.sizes %}
+                                    {{ size.name }}<br>
+                                {% endfor %}
+                            </td>
+                            <td>{% if concert.active %}{{ "merch.active"|trans }}{% else %}{{ "merch.not_active"|trans }}{% endif %}</td>
+                            <td>
+                                <a href="{{ path('merch_edit', {'merch': merch.id}) }}" class="btn btn-primary btn-sm">{{ "merch.button.edit"|trans }}</a>
+                                <a href="{{ path('merch_toggle_status', {'merch': merch.id}) }}" class="btn btn-info btn-sm">{{ "merch.button.toggle_status"|trans }}</a>
+                                <a onclick="return confirm('Opravdu chcete smazat toto zboží?')"
+                                   href="{{ path('merch_delete', {'merch': merch.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    {{ "merch.button.delete"|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
