@@ -1,0 +1,59 @@
+{% extends 'site/app_layout.html.twig' %}
+
+
+{% block meta_title %}Circus Brothers{% endblock %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+
+    <main class="" style="background-image: url('{{ asset('images/hp_header.webp') }}');">
+        <div class="cover-margin">
+            <div class="container">
+                <div class="d-flex">
+                    <img class="logo-hp mx-auto" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <article class="container">
+        <div class="row my-5">
+            <div class="col-8 mx-auto">
+                <p class="mb-0 fw-bold text-center">
+                    Kapela Circus Brothers je pevná součást klubové
+                    a festivalové scény v České republice. O jejich energii,
+                    disco-balkánu a večírcích se vždy mluví ještě dlouho. Na ulici,
+                    v klubech i na pódiích festivalů baví tisíce fanoušků, kteří na jejich
+                    show tančí často až do ranních hodin a posledních sil. Základem
+                    každého koncertu je disco-balkan, v kterém kombinují balkánskou
+                    dechovku, diskotékový beat, laciný pop, špinavý house,
+                    drsný rap a líbivý folk.
+                </p>
+            </div>
+            <p class="mb-0 text-center mt-5">Vystupovali jsme na</p>
+            <div class="row mt-3">
+                <div class="col-8 mx-auto">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col justify-content-center d-flex align-items-center">
+                            <img class="fest-logo" src="{{ asset('images/fests/RFP.webp') }}" alt="ROCK FOR PEOPLE">
+                        </div>
+                        <div class="col justify-content-center d-flex align-items-center">
+                            <img class="fest-logo" src="{{ asset('images/fests/MS.webp') }}" alt="MIGHTY SOUNDS">
+                        </div>
+                        <div class="col justify-content-center d-flex align-items-center">
+                            <img class="fest-logo" src="{{ asset('images/fests/RFCH.webp') }}" alt="ROCK FOR CHURCHILL">
+                        </div>
+                        <div class="col justify-content-center d-flex align-items-center">
+                            <img class="fest-logo" src="{{ asset('images/fests/SP.webp') }}" alt="SOUNDS TRACK">
+                        </div>
+                        <div class="col justify-content-center d-flex align-items-center">
+                            <img class="fest-logo" src="{{ asset('images/fests/KVIFF.webp') }}" alt="Karlovy Vary International Film Festival">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    {% include 'site/app/_component/footer.html.twig' %}
+{% endblock %}
+

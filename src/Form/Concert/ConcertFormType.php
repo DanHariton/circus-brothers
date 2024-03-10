@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ConcertFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,7 +34,11 @@ class ConcertFormType extends AbstractType
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
-            ->add('active', CheckboxType::class)
+            ->add('active', CheckboxType::class, [
+                'attr' => [
+                    'checked' => 'checked'
+                ],
+            ])
             ->add('submit', SubmitType::class);
     }
 

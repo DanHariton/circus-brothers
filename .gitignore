@@ -27,3 +27,6 @@
 /public/admin/
 /public/site/
 /composer.lock
+/public/uploads/
+/package-lock.json
+/public/mix-manifest.json

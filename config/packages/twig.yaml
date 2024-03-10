@@ -2,6 +2,10 @@ twig:
     file_name_pattern: '*.twig'
     form_themes: ['bootstrap_5_layout.html.twig']
 
+    globals:
+        imageAssets: '%img_assets_directory%'
+        imageSizeLimit: '%image_size_limit%'
+
 when@test:
     twig:
         strict_variables: true

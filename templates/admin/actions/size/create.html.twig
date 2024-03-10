@@ -1,10 +1,10 @@
 {% extends 'admin/components/layout.html.twig' %}
-{% trans_default_domain 'concert_create' %}
+{% trans_default_domain 'size_create' %}
 
-{% block title %}{{ "concert.create"|trans }}{% endblock %}
+{% block title %}{{ "size.create"|trans }}{% endblock %}
 
 {% block content %}
-    <h1 class="mt-4">{{ "concert.create"|trans }}</h1>
+    <h1 class="mt-4">{{ "size.create"|trans }}</h1>
 
     {% include 'admin/components/flashes.html.twig' %}
 
@@ -12,10 +12,6 @@
         {{ form_start(form) }}
         <div class="card-body">
             {{ form_row(form.name) }}
-            {{ form_row(form.date) }}
-            {{ form_row(form.location) }}
-            {{ form_row(form.tickets) }}
-            {{ form_row(form.active) }}
         </div>
         <div class="card-footer">
             {{ form_row(form.submit) }}

@@ -57,7 +57,7 @@ class File
         return $this->merch;
     }
 
-    public function setMerch(Merch $merch): void
+    public function setMerch(?Merch $merch): void
     {
         $this->merch = $merch;
     }

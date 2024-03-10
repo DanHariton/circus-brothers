@@ -1,0 +1,58 @@
+{% extends 'admin/components/layout.html.twig' %}
+{% trans_default_domain 'merch_edit' %}
+
+{% block title %}{{ "merch.edit"|trans }} - {{ merch.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="mt-4">{{ "merch.edit"|trans }} - {{ merch.name }}</h1>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        {{ form_start(form) }}
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.price) }}
+                </div>
+            </div>
+            {{ form_row(form.sizes) }}
+            {{ form_row(form.images) }}
+            {{ form_row(form.active) }}
+        </div>
+        <div class="card-footer">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    {% if merch.photos %}
+        <div class="card mb-4">
+            <div class="card-header">
+                {{ "merch.actual_photos"|trans }} (Size: 1050x770px, Best format - .WEBP)
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for image in merch.orderedImages %}
+                        <div class="col-6 col-sm-4 col-md-3 col-xl-2 mb-3">
+                            <img class="w-100" src="{{ asset(imageAssets ~ image.fileName) }}" alt="Obrazek {{ image.id }}">
+                            <a class="btn btn-sm btn-light mr-1 mt-2" href="{{ path('merch_photo_reposition', {'merch': merch.id, 'file': image.id, 'way': 'down'}) }}">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                            <a class="btn btn-sm btn-light mr-1 mt-2" href="{{ path('merch_photo_reposition', {'merch': merch.id, 'file': image.id, 'way': 'top'}) }}">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a class="btn btn-sm btn-danger mt-2"
+                               href="{{ path('merch_delete_photo', {'merch': merch.id, 'file': image.id}) }}">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'admin/components/layout.html.twig' %}
+{% trans_default_domain 'size_list' %}
+
+{% block title %}{{ "size.list"|trans }}{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>{{ "size.list"|trans }}</h1>
+        <a class="btn btn-primary" href="{{ path('size_create') }}">{{ "size.button.create"|trans }}</a>
+    </div>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatablesSimple" class="table table-striped text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>{{ "size.table.name"|trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for size in sizes %}
+                        <tr>
+                            <td>{{ size.name }}</td>
+                            <td>
+                                <a href="{{ path('size_edit', {'size': size.id}) }}" class="btn btn-primary btn-sm">{{ "size.button.edit"|trans }}</a>
+                                <a onclick="return confirm('Opravdu chcete smazat toto velikost?')"
+                                   href="{{ path('size_delete', {'size': size.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    {{ "size.button.delete"|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

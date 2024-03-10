@@ -128,6 +128,7 @@ class Merch
     {
         if (!$this->photos->contains($file)) {
             $this->photos[] = $file;
+            $file->setMerch($this);
         }
 
         return $this;
@@ -139,7 +140,12 @@ class Merch
      */
     public function removePhoto(File $file): self
     {
-        $this->photos->removeElement($file);
+        if ($this->photos->removeElement($file)) {
+            // set the owning side to null (unless already changed)
+            if ($file->getMerch() === $this) {
+                $file->setMerch(null);
+            }
+        }
 
         return $this;
     }
@@ -170,10 +176,10 @@ class Merch
         return $this->getOrderedImagesPaths()[0] ?? null;
     }
 
-    public function getMaxOrder(): int
+    public function getMaxPosition(): int
     {
         $orders = array_map(function (File $file) {
-            return $file->getOrder();
+            return $file->getPosition();
         }, $this->photos->getValues());
 
         if (empty($orders)) {
@@ -183,7 +189,7 @@ class Merch
         return max($orders) + 1;
     }
 
-    public function reorder(File $file, $way): void
+    public function reposition(File $file, $way): void
     {
         $orderedImages = $this->getOrderedImages();
         $maxOrder = count($orderedImages);
@@ -197,7 +203,7 @@ class Merch
         }
 
         foreach ($orderedImages as $index => $image) {
-            if ($index > 0 && $orderedImages[$index-1]->getOrder() === $image->getPosition()) {
+            if ($index > 0 && $orderedImages[$index-1]->getPosition() === $image->getPosition()) {
                 if ($way === 1) {
                     $image->setPosition($image->getPosition() - 1);
                 }
