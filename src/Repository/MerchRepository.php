@@ -21,28 +21,25 @@ class MerchRepository extends ServiceEntityRepository
         parent::__construct($registry, Merch::class);
     }
 
-    //    /**
-    //     * @return Merch[] Returns an array of Merch objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return Merch[]
+     */
+    public function findWithLimitCount(int $count, int $id = null): array
+    {
+        $query = $this->createQueryBuilder('m')
+            ->andWhere('m.active = :active')
+            ->setParameter('active', Merch::STATUS_ACTIVE);
 
-    //    public function findOneBySomeField($value): ?Merch
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        if (!is_null($id)) {
+            $query
+                ->andWhere('m.id != :id')
+                ->setParameter('id', $id);
+        }
+
+        return $query
+            ->orderBy('m.id', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -10,6 +10,8 @@ use Doctrine\Common\Collections\Collection;
 #[ORM\Entity(repositoryClass: MerchRepository::class)]
 class Merch
 {
+    public const STATUS_ACTIVE = 1;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

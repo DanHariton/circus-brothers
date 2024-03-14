@@ -23,7 +23,8 @@ class MerchController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly ImageUploader $imageUploader,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
+        private readonly SizeRepository $sizeRepository
     )
     {}
 
@@ -42,7 +43,10 @@ class MerchController extends AbstractController
     public function create(Request $request): RedirectResponse|Response
     {
         $merch = new Merch();
-        $form = $this->createForm(MerchFormType::class, $merch)->handleRequest($request);
+        $form = $this->createForm(MerchFormType::class, $merch, [
+            'selected_sizes' => $merch->getSizes()->toArray(),
+            'all_sizes' => $this->sizeRepository->findAll()
+        ])->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Merch $merch */
@@ -51,7 +55,7 @@ class MerchController extends AbstractController
             $images = $form->get('images')->getData();
             if (!empty($images)) {
                 foreach ($images as $position => $image) {
-                    $imageName = $this->imageUploader->upload($image, ImageUploader::TYPE_1050x770);
+                    $imageName = $this->imageUploader->upload($image, ImageUploader::TYPE_670_520);
                     $imageFile = new File();
                     $imageFile->setFileName($imageName);
                     $imageFile->setPosition($position);
@@ -76,11 +80,11 @@ class MerchController extends AbstractController
      * @throws Exception
      */
     #[Route("/edit/{merch}", name: "edit")]
-    public function edit(Merch $merch, Request $request, SizeRepository $sizeRepository): RedirectResponse|Response
+    public function edit(Merch $merch, Request $request): RedirectResponse|Response
     {
         $form = $this->createForm(MerchFormType::class, $merch, [
             'selected_sizes' => $merch->getSizes()->toArray(),
-            'all_sizes' => $sizeRepository->findAll()
+            'all_sizes' => $this->sizeRepository->findAll()
         ])->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,7 +95,7 @@ class MerchController extends AbstractController
             $images = $form->get('images')->getData();
             if (!empty($images)) {
                 foreach ($images as $position => $image) {
-                    $imageName = $this->imageUploader->upload($image, ImageUploader::TYPE_1050x770);
+                    $imageName = $this->imageUploader->upload($image, ImageUploader::TYPE_670_520);
                     $imageFile = new File();
                     $imageFile->setFileName($imageName);
                     $imageFile->setPosition($maxPosition + $position);

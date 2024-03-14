@@ -52,7 +52,7 @@ class MerchFormType extends AbstractType
                                 'mimeTypes' => [
                                     'image/*',
                                 ],
-                                'mimeTypesMessage' => 'Upload image (max size 5MB)!',
+                                'mimeTypesMessage' => 'Nahrajte obrázek (max size 5MB)!',
                             ])
                         ],
                     ]),

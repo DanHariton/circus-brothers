@@ -1,0 +1,57 @@
+.more-concerts {
+  border: 1px solid #000000;
+  text-decoration: none;
+  color: #000000;
+  padding: 12px 50px !important;
+}
+
+.more-concerts:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.date-concert {
+  padding: 1px 10px !important;
+}
+
+.merch-button {
+  border: 1px solid #FFFFFF;
+  padding: 6px 19px;
+}
+
+.merch-button:hover {
+  background-color: #FFFFFF;
+  color: #4915BC !important;
+}
+
+.merch-detail-dark {
+  padding: 6px 19px;
+  border: 1px solid #000000;
+}
+
+.merch-detail {
+  padding: 6px 19px;
+}
+
+.merch-detail:hover {
+  color: #4915BC !important;
+  border: 1px solid #FFFFFF;
+  background-color: #FFFFFF;
+  transition-duration: 800ms;
+  transition-property: background-color, color, border;
+
+}
+
+.download-button {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 7px 30px;
+}
+
+.download-button:hover {
+  color: #000000;
+  background-color: #FFFFFF;
+  transition-duration: 500ms;
+  transition-property: background-color, color;
+}

@@ -16,7 +16,7 @@ class File
     #[ORM\Column(length: 255)]
     private ?string $fileName = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $position = null;
 
     #[ORM\ManyToOne(targetEntity: Merch::class, inversedBy: "photos")]

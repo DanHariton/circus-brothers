@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Concert;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,28 +22,18 @@ class ConcertRepository extends ServiceEntityRepository
         parent::__construct($registry, Concert::class);
     }
 
-//    /**
-//     * @return Concert[] Returns an array of Concert objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Concert
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Concert[]
+     */
+    public function findFutureConcerts(int $count): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date >= :date')
+            ->setParameter('date', (new DateTime())->format('Y-m-d H:i:s'))
+            ->orderBy('c.date', 'ASC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
