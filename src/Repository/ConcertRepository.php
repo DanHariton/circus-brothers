@@ -25,15 +25,32 @@ class ConcertRepository extends ServiceEntityRepository
     /**
      * @return Concert[]
      */
-    public function findFutureConcerts(int $count): array
+    public function findFutureConcerts(int $count = null): array
     {
-        return $this->createQueryBuilder('c')
+        $query = $this->createQueryBuilder('c')
             ->andWhere('c.date >= :date')
             ->setParameter('date', (new DateTime())->format('Y-m-d H:i:s'))
-            ->orderBy('c.date', 'ASC')
-            ->setMaxResults($count)
+            ->orderBy('c.date', 'ASC');
+
+        if (!is_null($count)) {
+            $query->setMaxResults($count);
+        }
+
+        return $query
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+    }
+
+    /**
+     * @return Concert[]
+     */
+    public function findPastConcerts(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date < :date')
+            ->setParameter('date', (new DateTime())->format('Y-m-d H:i:s'))
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -2,13 +2,31 @@
 
 {% block meta_title %}Circus Brothers | Merch{% endblock %}
 
+{% set counter = 0 %}
+
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
 
-    <div class="container">
+    <div class="container mb-5 mt-5">
         <div class="row">
-            <div class="col-7">
+            <div class="col-7" data-aos="fade-right" data-aos-duration="1000">
                 <img class="w-100 mb-3" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
+            </div>
+            <div class="col-4 ms-5 d-flex justify-content-center flex-column" data-aos="fade-left" data-aos-duration="1000">
+                <p class="h5 fw-bold mb-4">{{ merch.name }}</p>
+                <p class="helvetica-font">Dostupné velikosti:</p>
+                <div class="d-flex mb-4">
+                    {% for size in merch.sizes %}
+                        <div class="me-2 size">
+                            {{ size.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <p class="mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
+                <p class="mb-0 helvetica-font">Pro objednání nás prosím kontaktuje na e-mail:</p>
+                <a class="text-dark helvetica-font" href="mailto:management@circusbrothers.com">management@circusbrothers.com</a>
+            </div>
+            <div class="col-7" data-aos="fade-right" data-aos-duration="1000">
                 <div class="row">
                     {% for image in merch.orderedImages[1:] %}
                         <div class="col-4 mb-3">
@@ -17,27 +35,19 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-4 ms-5 mt-5">
-                <div class="d-flex flex-column">
-                    <p class="h5 fw-bold">{{ merch.name }}</p>
-                    <p>Dostupné velikosti:</p>
-                    <p>{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
-                    <p>Pro objednání nás prosím kontaktuje na e-mail:</p>
-                    <a class="text-dark" href="mailto:management@circusbrothers.com">management@circusbrothers.com</a>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container py-5">
         <h5 class="fw-bold text-center mb-5">Další produkty</h5>
         <div class="row">
             {% for merch in merchs %}
-                <div class="col-4 mb-5  text-center">
+                <div class="col-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
                     <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                     <h4 class="fw-bold text-uppercase text-dark mt-5 mb-2">{{ merch.name }}</h4>
-                    <p class="text-dark mb-4">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
-                    <a class="text-dark merch-detail-dark text-decoration-none fw-bold" href="">Prohlédnout</a>
+                    <p class="text-dark mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
+                    <a class="text-dark merch-detail-dark text-decoration-none fw-bold" href="{{ path('app_merch_detail', {merch: merch.id}) }}">Prohlédnout</a>
                 </div>
+                {% set counter = counter + 1 %}
             {% endfor %}
         </div>
     </div>

@@ -55,3 +55,22 @@
   transition-duration: 500ms;
   transition-property: background-color, color;
 }
+
+.size {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 3px 7px;
+}
+
+#show-concerts {
+  background-color: transparent !important;
+  border: 1px solid #FFFFFF !important;
+  box-shadow: none;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 10px 35px;
+}
+
+#show-concerts:hover {
+  text-decoration: underline;
+}

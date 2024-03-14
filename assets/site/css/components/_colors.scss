@@ -2,6 +2,10 @@
   background-color: #F0F0F0;
 }
 
+.bg-white {
+  background-color: #000000;
+}
+
 .bg-concert-date-hp {
   background-color: #000000;
 }
@@ -10,10 +14,18 @@
   background-color: #4915BC;
 }
 
-.color-purple {
+.text-purple {
   color: #4915BC;
 }
 
 .bg-yellow {
   background-color: #F7CC01;
+}
+
+.color-shadow-concert {
+  color: #A389DD;
+}
+
+.bg-shadow-concert {
+  background-color: #A389DD !important;
 }

@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'DrukWide';
+  src: url('../fonts/DrukWide-Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url('../fonts/Helvetica.ttc') format('truetype');
+}
+
+body {
+  font-family: 'DrukWide', sans-serif;
+}
+
+.helvetica-font {
+  font-family: 'Helvetica', sans-serif;
+}

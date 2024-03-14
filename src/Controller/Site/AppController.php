@@ -43,13 +43,25 @@ class AppController extends AbstractController
     }
 
     #[Route("/merch/{merch}", name: "merch_detail")]
-    public function merch_detail(Merch $merch): Response
+    public function merchDetail(Merch $merch): Response
     {
         $merchs = $this->merchRepository->findWithLimitCount(3, $merch->getId());
 
         return $this->render('site/app/merch_detail.html.twig', [
             'merch' => $merch,
             'merchs' => $merchs
+        ]);
+    }
+
+    #[Route("/concerts", name: "concerts")]
+    public function concerts(): Response
+    {
+        $futureConcerts = $this->concertRepository->findFutureConcerts();
+        $pastConcerts = $this->concertRepository->findPastConcerts();
+
+        return $this->render('site/app/concerts.html.twig', [
+            'futureConcerts' => $futureConcerts,
+            'pastConcerts' => $pastConcerts
         ]);
     }
 }

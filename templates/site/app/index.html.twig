@@ -2,13 +2,15 @@
 
 {% block meta_title %}Circus Brothers{% endblock %}
 
+{% set counter = 0 %}
+
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
 
-    <main class="" style="background-image: url('{{ asset('images/hp_header.webp') }}');">
+    <main class="main-slider">
         <div class="cover-margin">
             <div class="container">
-                <div class="d-flex">
+                <div class="d-flex" data-aos="zoom-out" data-aos-duration="1500">
                     <img class="logo-hp mx-auto" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
                 </div>
             </div>
@@ -18,7 +20,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-8 mx-auto">
-                <p class="h5 mb-3 fw-bold text-center">
+                <p class="h5 mb-3 fw-bold text-center" data-aos="fade-up" data-aos-duration="1000">
                     Kapela Circus Brothers je pevná součást klubové
                     a festivalové scény v České republice. O jejich energii,
                     disco-balkánu a večírcích se vždy mluví ještě dlouho. Na ulici,
@@ -29,23 +31,23 @@
                     drsný rap a líbivý folk.
                 </p>
             </div>
-            <p class="mb-0 text-center mt-5">Vystupovali jsme na</p>
+            <p class="mb-0 text-center mt-5 helvetica-font">Vystupovali jsme na</p>
             <div class="row mt-3">
                 <div class="col-8 mx-auto">
                     <div class="row d-flex justify-content-around">
-                        <div class="col justify-content-center d-flex align-items-center">
+                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFP.webp') }}" alt="ROCK FOR PEOPLE">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center">
+                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-down" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/MS.webp') }}" alt="MIGHTY SOUNDS">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center">
+                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFCH.webp') }}" alt="ROCK FOR CHURCHILL">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center">
+                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-down" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/SP.webp') }}" alt="SOUNDS TRACK">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center">
+                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/KVIFF.webp') }}" alt="Karlovy Vary International Film Festival">
                         </div>
                     </div>
@@ -58,14 +60,14 @@
         <div class="container py-5">
             <div class="pb-2">
                 {% for concert in concerts %}
-                    <div class="d-flex justify-content-around align-items-center">
+                    <div class="d-flex justify-content-around align-items-center" data-aos="fade-left" data-aos-duration="1000">
                         <div class="text-capitalize px-1 fw-bold mb-0 text-white bg-concert-date-hp date-concert">
                             {{  concert.date|format_datetime(pattern="EEEE dd.MM.yy", locale='cs') }}
                         </div>
-                        <div class="text-uppercase h4 mb-0 fw-bold text-dark">
+                        <div class="text-uppercase h5 mb-0 fw-bold text-dark">
                             {{ concert.name }}
                         </div>
-                        <div class="text-dark">
+                        <div class="text-dark helvetica-font">
                             {{ concert.location }}
                         </div>
                         <a class="text-decoration-underline fw-bold text-dark" href="{{ concert.tickets }}" target="_blank">
@@ -74,22 +76,23 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="text-center mt-4 mb-2">
-                <a class="more-concerts mx-auto" href="">Další koncerty</a>
+            <div class="text-center mt-5 mb-2">
+                <a class="more-concerts mx-auto" href="{{ path('app_concerts') }}">Další koncerty</a>
             </div>
         </div>
     </div>
 
-    <div class="bg-purple pt-5 pb-3">
+    <div class="bg-purple grid-bg pt-5 pb-3">
         <div class="container pt-5">
             <div class="row">
                 {% for merch in merchs %}
-                    <div class="col-4 mb-5  text-center">
+                    <div class="col-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
                         <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                         <h4 class="fw-bold text-uppercase text-white mt-5 mb-2">{{ merch.name }}</h4>
-                        <p class="text-white mb-4">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
+                        <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
                         <a class="text-decoration-none text-white merch-button fw-bold" href="{{ path('app_merch_detail', {merch: merch.id}) }}">Prohlédnout</a>
                     </div>
+                    {% set counter = counter + 1 %}
                 {% endfor %}
             </div>
         </div>

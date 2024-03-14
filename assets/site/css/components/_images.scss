@@ -1,11 +1,29 @@
 .logo-nav {
-  width: 300px;
+  width: 280px;
 }
 
 .logo-hp {
   width: 280px;
 }
+
 .fest-logo {
   width: 125px;
 }
 
+.logo-pos {
+  position: absolute;
+  left: 2%;
+}
+
+.main-slider {
+  background-image: url('../images/hp_header.webp');
+  background-size: cover;
+}
+
+.grid-bg {
+  background-image: url('../images/line_1.webp');
+}
+
+.line-bg {
+  background-image: url('../images/line_2.webp');
+}
