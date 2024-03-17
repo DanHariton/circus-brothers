@@ -19,7 +19,7 @@
 
     <div class="container">
         <div class="row my-5">
-            <div class="col-8 mx-auto">
+            <div class="col-12 col-md-8 mx-auto">
                 <p class="h5 mb-3 fw-bold text-center" data-aos="fade-up" data-aos-duration="1000">
                     Kapela Circus Brothers je pevná součást klubové
                     a festivalové scény v České republice. O jejich energii,
@@ -33,21 +33,21 @@
             </div>
             <p class="mb-0 text-center mt-5 helvetica-font">Vystupovali jsme na</p>
             <div class="row mt-3">
-                <div class="col-8 mx-auto">
+                <div class="col-12 col-md-8 mx-auto">
                     <div class="row d-flex justify-content-around">
-                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFP.webp') }}" alt="ROCK FOR PEOPLE">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-down" data-aos-duration="1000">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-down" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/MS.webp') }}" alt="MIGHTY SOUNDS">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFCH.webp') }}" alt="ROCK FOR CHURCHILL">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-down" data-aos-duration="1000">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-down" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/SP.webp') }}" alt="SOUNDS TRACK">
                         </div>
-                        <div class="col justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/KVIFF.webp') }}" alt="Karlovy Vary International Film Festival">
                         </div>
                     </div>
@@ -60,7 +60,7 @@
         <div class="container py-5">
             <div class="pb-2">
                 {% for concert in concerts %}
-                    <div class="d-flex justify-content-around align-items-center" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="d-flex justify-content-around align-items-center" data-aos="fade-up" data-aos-duration="1000">
                         <div class="text-capitalize px-1 fw-bold mb-0 text-white bg-concert-date-hp date-concert">
                             {{  concert.date|format_datetime(pattern="EEEE dd.MM.yy", locale='cs') }}
                         </div>
@@ -86,7 +86,7 @@
         <div class="container pt-5">
             <div class="row">
                 {% for merch in merchs %}
-                    <div class="col-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
+                    <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
                         <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                         <h4 class="fw-bold text-uppercase text-white mt-5 mb-2">{{ merch.name }}</h4>
                         <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>

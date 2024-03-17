@@ -9,10 +9,10 @@
 
     <div class="container mb-5 mt-5">
         <div class="row">
-            <div class="col-7" data-aos="fade-right" data-aos-duration="1000">
+            <div class="col-12 col-md-7" data-aos="fade-right" data-aos-duration="1000">
                 <img class="w-100 mb-3" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
             </div>
-            <div class="col-4 ms-5 d-flex justify-content-center flex-column" data-aos="fade-left" data-aos-duration="1000">
+            <div class="col-12 col-md-4 ms-3 ms-lg-5 d-flex justify-content-center flex-column" data-aos="fade-left" data-aos-duration="1000">
                 <p class="h5 fw-bold mb-4">{{ merch.name }}</p>
                 <p class="helvetica-font">Dostupné velikosti:</p>
                 <div class="d-flex mb-4">
@@ -26,10 +26,10 @@
                 <p class="mb-0 helvetica-font">Pro objednání nás prosím kontaktuje na e-mail:</p>
                 <a class="text-dark helvetica-font" href="mailto:management@circusbrothers.com">management@circusbrothers.com</a>
             </div>
-            <div class="col-7" data-aos="fade-right" data-aos-duration="1000">
+            <div class="col-12 col-md-7 mt-4 mt-md-0" data-aos="fade-right" data-aos-duration="1000">
                 <div class="row">
                     {% for image in merch.orderedImages[1:] %}
-                        <div class="col-4 mb-3">
+                        <div class="col-6 col-md-4 mb-3">
                             <img class="w-100" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ merch.name }}">
                         </div>
                     {% endfor %}
@@ -41,7 +41,7 @@
         <h5 class="fw-bold text-center mb-5">Další produkty</h5>
         <div class="row">
             {% for merch in merchs %}
-                <div class="col-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
+                <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
                     <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                     <h4 class="fw-bold text-uppercase text-dark mt-5 mb-2">{{ merch.name }}</h4>
                     <p class="text-dark mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>

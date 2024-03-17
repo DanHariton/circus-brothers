@@ -1,3 +1,8 @@
 .border-top-white {
   border-top: 1px solid #FFFFFF;
 }
+
+.border-none, .border-none:focus, .border-none:focus-visible {
+  border: none !important;
+  box-shadow: none !important;
+}

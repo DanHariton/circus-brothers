@@ -27,3 +27,10 @@
 .line-bg {
   background-image: url('../images/line_2.webp');
 }
+
+@media only screen and (max-width: 768px) {
+  .logo-pos {
+    top: 15px;
+    left: 0;
+  }
+}

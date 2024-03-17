@@ -1,7 +1,3 @@
-.menu-link:hover {
-  text-decoration: underline;
-}
-
 .footer-link {
   color: #000000;
   text-decoration: none;
@@ -14,4 +10,74 @@
 
 .socials:hover {
   color: #FFFFFF;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: #000000;
+}
+.navbar .navbar-nav .nav-link {
+  color: #000000;
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar {
+    padding: 0;
+  }
+  .navbar .navbar-brand {
+    padding: 0 0.7em;
+  }
+  .navbar .navbar-nav .nav-link {
+    padding: 7px 0;
+  }
+  .navbar .navbar-nav .nav-item {
+    margin: 0 1em;
+  }
+}
+
+.navbar .navbar-nav .nav-item {
+  position: relative;
+}
+
+.navbar .navbar-nav .nav-item::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: #000000;
+  width: 0%;
+  content: "";
+  height: 2px;
+}
+
+.navbar .navbar-nav .nav-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: transparent;
+  width: 0%;
+  content: "";
+  height: 2px;
+  transition: all 0.5s;
+}
+
+.navbar .navbar-nav .nav-link.active::after,
+.navbar .navbar-nav .nav-link:focus::after,
+.navbar .navbar-nav .nav-link:active::after {
+  width: 100%;
+  background-color: #000000;
+}
+
+.navbar .navbar-nav .active::after {
+  width: 100% !important;
+}
+
+.navbar .navbar-nav .nav-item:hover::after {
+  width: 100%;
+}
+
+.navbar .navbar-nav .nav-item::after {
+  transition: all 0.5s;
 }
