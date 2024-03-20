@@ -17,9 +17,10 @@
 .merch-button {
   border: 1px solid #FFFFFF;
   padding: 6px 19px;
+  background-color: transparent;
 }
 
-.merch-button:hover {
+.merch-item:hover .merch-button {
   background-color: #FFFFFF;
   color: #4915BC !important;
 }
@@ -27,6 +28,12 @@
 .merch-detail-dark {
   padding: 6px 19px;
   border: 1px solid #000000;
+  background-color: transparent;
+}
+
+.merch-item:hover .merch-detail-dark {
+  background-color: #000000;
+  color: #FFFFFF !important;
 }
 
 .merch-detail {

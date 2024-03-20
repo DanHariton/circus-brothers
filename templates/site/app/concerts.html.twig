@@ -2,8 +2,6 @@
 
 {% block meta_title %}Circus Brothers | Koncerty{% endblock %}
 
-{% set counter = 0 %}
-
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
 
@@ -11,7 +9,7 @@
         <div class="container">
             <h5 class="text-center text-white mb-5">Nadcházející koncerty</h5>
             {% for concert in futureConcerts %}
-                <div class="row mb-5 align-items-center" {% if counter is divisible by(2) %} data-aos="fade-left" {% else %} data-aos="fade-right" {% endif %} data-aos-duration="1500">
+                <div class="row mb-5 align-items-center">
                     <div class="col-2 me-5 text-center text-capitalize px-1 fw-bold mb-0 text-purple bg-white date-concert">
                         {{  concert.date|format_datetime(pattern="EEEE dd.MM.yy", locale='cs') }}
                     </div>
@@ -27,11 +25,10 @@
                         </a>
                     </div>
                 </div>
-                {% set counter = counter + 1 %}
             {% endfor %}
-            <div id="past-concerts" class="d-none border-top-white pt-5" data-aos="fade-up">
+            <div id="past-concerts" class="d-none border-top-white pt-5">
                 {% for concert in pastConcerts %}
-                    <div class="row mb-5 align-items-center">
+                    <div class="row mb-5 align-items-center past-concert-item" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-2 me-5 bg-shadow-concert text-center text-capitalize px-1 fw-bold mb-0 text-purple bg-white date-concert">
                             {{  concert.date|format_datetime(pattern="EEEE dd.MM.yy", locale='cs') }}
                         </div>
@@ -44,7 +41,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="text-center" data-aos="fade-up" data-aos-duration="1000">
+            <div class="text-center">
                 <button id="show-concerts" class="mt-2">
                     Odehrané koncerty
                 </button>
@@ -54,7 +51,7 @@
 
     <div class="container">
         <div class="row my-5">
-            <div class="col-12 col-md-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
+            <div class="col-12 col-md-8 mx-auto mt-4" data-aos="fade-up" data-aos-duration="1000">
                 <p class="h5 mb-3 fw-bold text-center">
                     Kapela Circus Brothers je pevná součást klubové
                     a festivalové scény v České republice. O jejich energii,
@@ -67,22 +64,22 @@
                 </p>
             </div>
             <p class="mb-0 text-center mt-5 helvetica-font">Vystupovali jsme na</p>
-            <div class="row mt-3">
+            <div class="row mt-3 mb-4">
                 <div class="col-12 col-md-8 mx-auto">
                     <div class="row d-flex justify-content-around">
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFP.webp') }}" alt="ROCK FOR PEOPLE">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-down">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/MS.webp') }}" alt="MIGHTY SOUNDS">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFCH.webp') }}" alt="ROCK FOR CHURCHILL">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-down">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/SP.webp') }}" alt="SOUNDS TRACK">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up">
+                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/KVIFF.webp') }}" alt="Karlovy Vary International Film Festival">
                         </div>
                     </div>

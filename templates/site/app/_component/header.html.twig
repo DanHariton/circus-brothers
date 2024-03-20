@@ -1,17 +1,17 @@
-<nav class="navbar navbar-expand-md py-3 justify-content-end">
+<nav class="navbar navbar-expand-md py-4 justify-content-end">
     <a class="logo-pos ms-lg-5 ms-1 navbar-brand p-0" href="{{ path('app_index') }}"><img class="logo-nav" src="{{ asset('images/logo/logo_yellow.webp') }}" alt="Circus Brother"></a>
     <button class="navbar-toggler third-button border-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <div class="animated-icon3"><span></span><span></span><span></span></div>
     </button>
     <div class="collapse navbar-collapse justify-content-xxl-center justify-content-end me-lg-5 me-2" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item ps-2 ps-md-0 {% if app.request.attributes.get('_route') == 'app_concerts' %}active{% endif %}">
+            <li class="nav-item ps-2 ps-md-0 ms-xxl-5 ms-lg-5 ms-0 me-xxl-5 me-lg-5 me-0 {% if app.request.attributes.get('_route') == 'app_concerts' %}active{% endif %}">
                 <a class="nav-link text-dark fw-bold " href="{{ path('app_concerts') }}">Koncerty</a>
             </li>
-            <li class="nav-item ps-2 ps-md-0 {% if app.request.attributes.get('_route') == 'app_photos' %}active{% endif %}">
+            <li class="nav-item ps-2 ps-md-0 me-xxl-5 me-lg-5 me-0 {% if app.request.attributes.get('_route') == 'app_photos' %}active{% endif %}">
                 <a class="nav-link text-dark fw-bold" href="#">Fotky & videa</a>
             </li>
-            <li class="nav-item ps-2 ps-md-0 {% if app.request.attributes.get('_route') == 'app_merch' %}active{% endif %}">
+            <li class="nav-item ps-2 ps-md-0 me-xxl-5 me-lg-5 me-0 {% if app.request.attributes.get('_route') == 'app_merch' %}active{% endif %}">
                 <a class="nav-link text-dark fw-bold" href="{{ path('app_merch') }}">Merch</a>
             </li>
             <li class="nav-item ps-2 ps-md-0 {% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}">

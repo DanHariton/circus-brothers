@@ -2,22 +2,19 @@
 
 {% block meta_title %}Circus Brothers | Merch{% endblock %}
 
-{% set counter = 0 %}
-
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
 
     <div class="bg-purple grid-bg py-5">
-        <div class="container pt-5">
+        <div class="container pt-5 my-4">
             <div class="row">
                 {% for merch in merchs %}
-                    <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center" {% if counter is divisible by(2) %} data-aos="fade-up" {% else %} data-aos="fade-down" {% endif %} data-aos-duration="1000">
+                    <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
                         <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                         <h4 class="fw-bold text-uppercase text-white mt-5 mb-2">{{ merch.name }}</h4>
                         <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
-                        <a class="text-white merch-detail text-decoration-none fw-bold" href="{{ path('app_merch_detail', {merch: merch.id}) }}">Prohlédnout</a>
-                    </div>
-                    {% set counter = counter + 1 %}
+                        <button class="text-white merch-button fw-bold">Prohlédnout</button>
+                    </a>
                 {% endfor %}
             </div>
         </div>
