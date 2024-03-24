@@ -8,7 +8,9 @@
     <div class="container mb-5 mt-5">
         <div class="row">
             <div class="col-12 col-md-7" data-aos="fade-right" data-aos-duration="1000">
-                <img class="w-100 mb-3" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
+                <a href="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" data-lightbox="{{ merch.name }}" data-title="{{ merch.name }}">
+                    <img class="w-100 mb-3" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
+                </a>
             </div>
             <div class="col-12 col-md-4 ms-3 ms-lg-5 d-flex justify-content-center flex-column" data-aos="fade-left" data-aos-duration="1000">
                 <p class="h5 fw-bold mb-4">{{ merch.name }}</p>
@@ -28,7 +30,9 @@
                 <div class="row">
                     {% for image in merch.orderedImages[1:] %}
                         <div class="col-6 col-md-4 mb-3">
-                            <img class="w-100" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ merch.name }}">
+                            <a href="{{ asset(imageAssets ~ image.fileName) }}" data-lightbox="{{ merch.name }}" data-title="{{ merch.name }}">
+                                <img class="w-100" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ merch.name }}">
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
@@ -38,7 +42,7 @@
     <div class="container py-5">
         <h5 class="fw-bold text-center mb-5">Další produkty</h5>
         <div class="row">
-            {% for merch in merchs %}
+            {% for merch in merchItems %}
                 <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
                     <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                     <h4 class="fw-bold text-uppercase text-dark mt-5 mb-2">{{ merch.name }}</h4>
@@ -51,4 +55,3 @@
 
     {% include 'site/app/_component/footer.html.twig' %}
 {% endblock %}
-

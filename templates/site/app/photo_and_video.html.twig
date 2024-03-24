@@ -1,0 +1,26 @@
+{% extends 'site/app_layout.html.twig' %}
+
+{% block meta_title %}Circus Brothers | Kontakt{% endblock %}
+
+{% set count = 1 %}
+
+{% block body %}
+    {% include 'site/app/_component/header.html.twig' %}
+
+    <div class="w-100">
+        {% for item in mediaContentItems %}
+            <div class="row">
+                {% if item.photo %}
+                    {% if count >= 2 %}
+                        {% set count = 1 %}
+                    {% endif %}
+                    <img class="vh-100" src="{{ asset(imageAssets ~ item.photo.fileName) }}" alt="{{ item.name }}">
+                {% else %}
+                    <iframe class="vh-100 w-100" src="{{ item.videoLink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    {% include 'site/app/_component/footer.html.twig' %}
+{% endblock %}

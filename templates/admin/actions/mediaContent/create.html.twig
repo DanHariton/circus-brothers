@@ -1,0 +1,25 @@
+{% extends 'admin/components/layout.html.twig' %}
+{% trans_default_domain 'media_content_create' %}
+
+{% block title %}Admin | Přidat další Fotku/Video{% endblock %}
+
+{% block content %}
+    <h1 class="mt-4">Přidat další Fotku/Video</h1>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        {{ form_start(form) }}
+        <div class="card-body">
+            {{ form_row(form.name) }}
+            {{ form_row(form.image) }}
+            {{ form_row(form.fullWidth) }}
+            {{ form_row(form.videoLink) }}
+            {{ form_row(form.active) }}
+        </div>
+        <div class="card-footer">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

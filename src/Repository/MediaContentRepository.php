@@ -21,28 +21,27 @@ class MediaContentRepository extends ServiceEntityRepository
         parent::__construct($registry, MediaContent::class);
     }
 
-    //    /**
-    //     * @return MediaContent[] Returns an array of MediaContent objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findLastPosition(): ?MediaContent
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.position', 'desc')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
+    }
 
-    //    public function findOneBySomeField($value): ?MediaContent
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * @return MediaContent[]
+     */
+    public function findActiveContentSortedByPosition(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.active = :active')
+            ->setParameter('active', MediaContent::STATUS_ACTIVE)
+            ->orderBy('m.position', 'asc')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

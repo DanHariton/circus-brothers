@@ -4,6 +4,7 @@ namespace App\Controller\Site;
 
 use App\Entity\Merch;
 use App\Repository\ConcertRepository;
+use App\Repository\MediaContentRepository;
 use App\Repository\MerchRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +21,11 @@ class AppController extends AbstractController
     public function index(): Response
     {
         $concerts = $this->concertRepository->findFutureConcerts(1);
-        $merchs = $this->merchRepository->findWithLimitCount(3);
+        $merchItems = $this->merchRepository->findWithLimitCount(3);
 
         return $this->render('site/app/index.html.twig', [
-            'concerts' => $concerts,
-            'merchs'   => $merchs
+            'concerts'    => $concerts,
+            'merchItems' => $merchItems
         ]);
     }
 
@@ -32,7 +33,7 @@ class AppController extends AbstractController
     public function merch(): Response
     {
         return $this->render('site/app/merch.html.twig', [
-           'merchs' => $this->merchRepository->findAll()
+           'merchItems' => $this->merchRepository->findActiveMerch()
         ]);
     }
 
@@ -45,11 +46,11 @@ class AppController extends AbstractController
     #[Route("/merch/{merch}", name: "merch_detail")]
     public function merchDetail(Merch $merch): Response
     {
-        $merchs = $this->merchRepository->findWithLimitCount(3, $merch->getId());
+        $merchItems = $this->merchRepository->findWithLimitCount(3, $merch->getId());
 
         return $this->render('site/app/merch_detail.html.twig', [
             'merch' => $merch,
-            'merchs' => $merchs
+            'merchItems' => $merchItems
         ]);
     }
 
@@ -62,6 +63,16 @@ class AppController extends AbstractController
         return $this->render('site/app/concerts.html.twig', [
             'futureConcerts' => $futureConcerts,
             'pastConcerts' => $pastConcerts
+        ]);
+    }
+
+    #[Route("/photo-and-video", name: "photo_and_video")]
+    public function photoAndVideo(MediaContentRepository $mediaContentRepository): Response
+    {
+        $mediaContentItems = $mediaContentRepository->findActiveContentSortedByPosition();
+
+        return $this->render('site/app/photo_and_video.html.twig', [
+            'mediaContentItems' => $mediaContentItems
         ]);
     }
 }

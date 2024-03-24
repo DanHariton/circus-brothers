@@ -16,7 +16,7 @@ class ImageUploader
 
     const TYPE_1280x800 = 3;
 
-    const TYPE_1920x890 = 4;
+    const TYPE_1920x1080 = 4;
 
 
     /** @var array|int[] $size_670_520 */
@@ -27,8 +27,8 @@ class ImageUploader
     /** @var array|int[] $size_1280x800 */
     private static array $size_1280x800 = [1280, 800];
 
-    /** @var array|int[] $size_1920x890 */
-    private static array $size_1920x890 = [1920, 890];
+    /** @var array|int[] $size_1920x1080 */
+    private static array $size_1920x1080 = [1920, 1080];
 
     private string $targetDirectoryImg;
     private Filesystem $filesystem;
@@ -64,7 +64,7 @@ class ImageUploader
             $size = match ($imageType) {
                 3 => self::$size_1280x800,
                 2 => self::$size_1200x770,
-                4 => self::$size_1920x890,
+                4 => self::$size_1920x1080,
                 default => self::$size_670_520,
             };
             $this->resizer->resizeTo(...$size);

@@ -42,4 +42,17 @@ class MerchRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return Merch[]
+     */
+    public function findActiveMerch(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.active = :active')
+            ->setParameter('active', Merch::STATUS_ACTIVE)
+            ->orderBy('m.id', 'desc')
+            ->getQuery()
+            ->getResult();
+    }
 }

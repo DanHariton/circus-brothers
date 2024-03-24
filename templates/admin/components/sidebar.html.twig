@@ -2,24 +2,24 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark main-bg" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading text-white">{{ "side_menu.menu"|trans }}</div>
-                <a class="nav-link text-white" href="{{ path('concert_list') }}">
+                <div class="sb-sidenav-menu-heading text-white">Menu</div>
+                <a class="nav-link text-white nav-link-yellow" href="{{ path('concert_list') }}">
                     <div class="sb-nav-link-icon text-white"><i class="fa-solid fa-music"></i></div>
-                    {{ "side_menu.concerts"|trans }}
+                    Koncerty
                 </a>
-                <a class="nav-link text-white" href="{{ path('concert_list') }}">
+                <a class="nav-link text-white nav-link-yellow" href="{{ path('media_content_list') }}">
                     <div class="sb-nav-link-icon text-white"><i class="fa-regular fa-image"></i></div>
-                    {{ "side_menu.photo_video"|trans }}
+                    Fotky&Videa
                 </a>
-                <a class="nav-link collapsed text-white" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed text-white nav-link-yellow" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon text-white"><i class="fa-solid fa-cart-shopping"></i></div>
-                    {{ "side_menu.merch"|trans }}
+                    Merch
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ path('merch_list') }}">{{ "side_menu.items"|trans }}</a>
-                        <a class="nav-link" href="{{ path('size_list') }}">{{ "side_menu.size"|trans }}</a>
+                        <a class="nav-link nav-link-yellow" href="{{ path('merch_list') }}">Zboží</a>
+                        <a class="nav-link nav-link-yellow" href="{{ path('size_list') }}">Rozměry</a>
                     </nav>
                 </div>
             </div>

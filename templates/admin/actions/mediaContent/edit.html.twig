@@ -1,0 +1,40 @@
+{% extends 'admin/components/layout.html.twig' %}
+{% trans_default_domain 'media_content_edit' %}
+
+{% block title %}Admin | Změnit Fotku/Video{% endblock %}
+
+{% block content %}
+    <h1 class="mt-4">Změnit Fotku/Video - {{ mediaContentItem.name }}</h1>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        {{ form_start(form) }}
+        <div class="card-body">
+            {{ form_row(form.name) }}
+            {% if mediaContentItem.photo is null %}
+                {{ form_row(form.videoLink) }}
+            {% else %}
+                {{ form_row(form.image) }}
+                {{ form_row(form.fullWidth) }}
+            {% endif %}
+            {{ form_row(form.active) }}
+        </div>
+        <div class="card-footer">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    {% if mediaContentItem.photo %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <img class="w-100" src="{{ asset(imageAssets ~ mediaContentItem.photo.fileName) }}" alt="Obrazek {{ mediaContentItem.id }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

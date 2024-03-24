@@ -11,6 +11,20 @@
   flex: 1;
 }
 
+.past-concerts-transition {
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0;
+  transform: scaleY(0);
+  height: 0;
+  overflow: hidden;
+}
+
+.past-concerts-visible {
+  opacity: 1;
+  transform: scaleY(1);
+  height: auto;
+}
+
 @media screen and (min-width: 768px) {
   .cover-margin {
     padding-top: 8em;

@@ -1,0 +1,50 @@
+{% extends 'admin/components/layout.html.twig' %}
+{% trans_default_domain 'media_content_list' %}
+
+{% block title %}Admin | Fotky & Videa{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>Fotky&Videa</h1>
+        <a class="btn btn-primary" href="{{ path('media_content_create') }}">Přidat další</a>
+    </div>
+
+    {% include 'admin/components/flashes.html.twig' %}
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatablesSimple" class="table table-striped text-dark data-table">
+                    <thead>
+                    <tr>
+                        <th>Název</th>
+                        <th>Pořadí zobrazení</th>
+                        <th>Na celou šířku?</th>
+                        <th>Aktivní?</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in contentItems %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.position }}</td>
+                            <td>{% if item.fullWidth %}Ano{% else %}Ne{% endif %}</td>
+                            <td>{% if item.active %}Ano{% else %}Ne{% endif %}</td>
+                            <td>
+                                <a href="{{ path('media_content_edit', {'mediaContent': item.id}) }}" class="btn btn-primary btn-sm">Změnit</a>
+                                <a href="{{ path('media_content_toggle_status', {'mediaContent': item.id}) }}" class="btn btn-info btn-sm">Změnit status</a>
+                                <a onclick="return confirm('Opravdu chcete smazat tuto položku?')"
+                                   href="{{ path('media_content_delete', {'mediaContent': item.id}) }}"
+                                   class="btn btn-danger btn-sm">
+                                    Smazat
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

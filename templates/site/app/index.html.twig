@@ -70,7 +70,7 @@
                     </a>
                 </div>
             {% endfor %}
-            <div class="text-center mt-5 mb-2">
+            <div class="text-center mt-3 mb-2">
                 <a class="more-concerts mx-auto" href="{{ path('app_concerts') }}">Další koncerty</a>
             </div>
         </div>
@@ -79,7 +79,7 @@
     <div class="bg-purple grid-bg pt-5 pb-3">
         <div class="container pt-5 my-4">
             <div class="row">
-                {% for merch in merchs %}
+                {% for merch in merchItems %}
                     <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
                         <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                         <h4 class="fw-bold text-uppercase text-white mt-5 mb-2">{{ merch.name }}</h4>
@@ -93,4 +93,3 @@
 
     {% include 'site/app/_component/footer.html.twig' %}
 {% endblock %}
-

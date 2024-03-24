@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MediaContentRepository::class)]
 class MediaContent
 {
+    public const PHOTO = 1;
+    public const VIDEO = 2;
+    public const STATUS_ACTIVE = 1;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -16,9 +20,6 @@ class MediaContent
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $altName = null;
 
     #[ORM\Column]
     private ?int $position = null;
@@ -29,6 +30,9 @@ class MediaContent
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(name: 'file_id', referencedColumnName: 'id', onDelete: "CASCADE")]
     private ?File $photo = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $fullWidth = null;
 
     #[ORM\Column]
     private ?bool $active = null;
@@ -46,18 +50,6 @@ class MediaContent
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAltName(): ?string
-    {
-        return $this->altName;
-    }
-
-    public function setAltName(?string $altName): static
-    {
-        $this->altName = $altName;
 
         return $this;
     }
@@ -106,5 +98,15 @@ class MediaContent
         $this->active = $active;
 
         return $this;
+    }
+
+    public function getFullWidth(): ?bool
+    {
+        return $this->fullWidth;
+    }
+
+    public function setFullWidth(?bool $fullWidth): void
+    {
+        $this->fullWidth = $fullWidth;
     }
 }
