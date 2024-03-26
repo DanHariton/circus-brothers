@@ -12,7 +12,18 @@
                     <img class="w-100 mb-3" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
                 </a>
             </div>
-            <div class="col-12 col-md-4 ms-3 ms-lg-5 d-flex justify-content-center flex-column">
+            <div class="col-12 col-md-7 mt-1 mb-3 d-md-none d-block">
+                <div class="row">
+                    {% for image in merch.orderedImages[1:] %}
+                        <div class="col-6 col-md-4 mb-3">
+                            <a href="{{ asset(imageAssets ~ image.fileName) }}" data-lightbox="{{ merch.name }}" data-title="{{ merch.name }}">
+                                <img class="w-100" src="{{ asset(imageAssets ~ image.fileName) }}" alt="{{ merch.name }}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 col-md-4 px-4 px-md-0 ms-0 ms-md-3 ms-lg-5 d-flex justify-content-center flex-column">
                 <p class="h5 fw-bold mb-4">{{ merch.name }}</p>
                 <p class="helvetica-font">Dostupné velikosti:</p>
                 <div class="d-flex mb-4">
@@ -26,7 +37,7 @@
                 <p class="mb-0 helvetica-font">Pro objednání nás prosím kontaktuje na e-mail:</p>
                 <a class="text-dark helvetica-font" href="mailto:management@circusbrothers.com">management@circusbrothers.com</a>
             </div>
-            <div class="col-12 col-md-7 mt-4 mt-md-0">
+            <div class="col-12 col-md-7 mt-4 mt-md-0 d-none d-md-block">
                 <div class="row">
                     {% for image in merch.orderedImages[1:] %}
                         <div class="col-6 col-md-4 mb-3">
@@ -45,7 +56,7 @@
             {% for merch in merchItems %}
                 <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
                     <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
-                    <h4 class="fw-bold text-uppercase text-dark mt-5 mb-2">{{ merch.name }}</h4>
+                    <h4 class="fw-bold text-uppercase text-dark mt-3 mt-md-5 mb-2">{{ merch.name }}</h4>
                     <p class="text-dark mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
                     <button class="text-dark merch-detail-dark fw-bold">Prohlédnout</button>
                 </a>

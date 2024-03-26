@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-12 col-md-8 mx-auto mt-4">
-                <p class="h5 mb-3 fw-bold text-center" data-aos="fade-up" data-aos-duration="1000">
+                <p class="h5 mb-3 fw-bold text-center fest-text" data-aos="fade-up" data-aos-duration="1000">
                     Kapela Circus Brothers je pevná součást klubové
                     a festivalové scény v České republice. O jejich energii,
                     disco-balkánu a večírcích se vždy mluví ještě dlouho. Na ulici,
@@ -31,19 +31,19 @@
             <div class="row mt-3 mb-4">
                 <div class="col-12 col-md-8 mx-auto">
                     <div class="row d-flex justify-content-around">
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-5 mb-md-0 justify-content-sm-center justify-content-start d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFP.webp') }}" alt="ROCK FOR PEOPLE">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-5 mb-md-0 justify-content-sm-center justify-content-end d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/MS.webp') }}" alt="MIGHTY SOUNDS">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-5 mb-md-0 justify-content-sm-center justify-content-start d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/RFCH.webp') }}" alt="ROCK FOR CHURCHILL">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-5 mb-md-0 justify-content-sm-center justify-content-end d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/SP.webp') }}" alt="SOUNDS TRACK">
                         </div>
-                        <div class="col mb-4 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col mb-5 mb-md-0 justify-content-center d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000">
                             <img class="fest-logo" src="{{ asset('images/fests/KVIFF.webp') }}" alt="Karlovy Vary International Film Festival">
                         </div>
                     </div>
@@ -53,16 +53,16 @@
     </div>
 
     <div class="hp-concerts py-5">
-        <div class="container py-5">
+        <div class="container py-lg-5 py-0">
             {% for concert in concerts %}
-                <div class="d-flex justify-content-around align-items-center pb-3">
-                    <div class="text-capitalize px-1 fw-bold mb-0 text-white bg-concert-date-hp date-concert">
+                <div class="d-flex justify-content-around align-items-center pb-3 flex-lg-row flex-column">
+                    <div class="text-capitalize px-1 fw-bold text-white bg-concert-date-hp date-concert mb-3 mb-lg-0">
                         {{  concert.date|format_datetime(pattern="EEEE dd.MM.yy", locale='cs') }}
                     </div>
-                    <div class="text-uppercase h5 mb-0 fw-bold text-dark">
+                    <div class="text-uppercase h5 mb-3 mb-lg-0 fw-bold text-dark text-center">
                         {{ concert.name }}
                     </div>
-                    <div class="text-dark helvetica-font">
+                    <div class="text-dark helvetica-font mb-3 mb-lg-0">
                         {{ concert.location }}
                     </div>
                     <a class="text-decoration-underline fw-bold text-dark" href="{{ concert.tickets }}" target="_blank">
@@ -70,7 +70,7 @@
                     </a>
                 </div>
             {% endfor %}
-            <div class="text-center mt-3 mb-2">
+            <div class="text-center mt-5 mt-lg-3 mb-2">
                 <a class="more-concerts mx-auto" href="{{ path('app_concerts') }}">Další koncerty</a>
             </div>
         </div>
@@ -82,7 +82,7 @@
                 {% for merch in merchItems %}
                     <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
                         <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
-                        <h4 class="fw-bold text-uppercase text-white mt-5 mb-2">{{ merch.name }}</h4>
+                        <h4 class="fw-bold text-uppercase text-white mt-3 mt-md-5 mb-2">{{ merch.name }}</h4>
                         <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
                         <button class="text-white merch-button fw-bold">Prohlédnout</button>
                     </a>

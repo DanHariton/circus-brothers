@@ -8,15 +8,28 @@
     {% include 'site/app/_component/header.html.twig' %}
 
     <div class="w-100">
-        {% for item in mediaContentItems %}
-            <div class="row">
-                {% if item.photo %}
-                    {% if count >= 2 %}
-                        {% set count = 1 %}
-                    {% endif %}
-                    <img class="vh-100" src="{{ asset(imageAssets ~ item.photo.fileName) }}" alt="{{ item.name }}">
+        {% for block in mediaContentItems %}
+            <div class="row g-0">
+                {% set isPhotoBlock = block|first.videoLink is null %}
+                {% if isPhotoBlock %}
+                    {% for mediaContent in block %}
+                        <div class="col-lg-6 col-12">
+                            <img src="{{ asset(imageAssets ~ mediaContent.photo.fileName) }}" alt="{{ mediaContent.name }}" style="width: 100%; height: auto;">
+                        </div>
+                    {% endfor %}
                 {% else %}
-                    <iframe class="vh-100 w-100" src="{{ item.videoLink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    {% for mediaContent in block %}
+                        <div class="col-12 vh-100">
+                            <iframe class="vh-100 w-100"
+                                    src="{{ mediaContent.videoLink }}"
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    {% endfor %}
                 {% endif %}
             </div>
         {% endfor %}

@@ -12,7 +12,7 @@
                 {% for merch in merchItems %}
                     <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
                         <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
-                        <h4 class="fw-bold text-uppercase text-white mt-5 mb-2">{{ merch.name }}</h4>
+                        <h4 class="fw-bold text-uppercase text-white mt-3 mt-md-5 mb-2">{{ merch.name }}</h4>
                         <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
                         <button class="text-white merch-button fw-bold">Prohlédnout</button>
                     </a>

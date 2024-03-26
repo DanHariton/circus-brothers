@@ -6,6 +6,7 @@ use App\Entity\Merch;
 use App\Repository\ConcertRepository;
 use App\Repository\MediaContentRepository;
 use App\Repository\MerchRepository;
+use App\Service\MediaContent\MediaContentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -67,9 +68,11 @@ class AppController extends AbstractController
     }
 
     #[Route("/photo-and-video", name: "photo_and_video")]
-    public function photoAndVideo(MediaContentRepository $mediaContentRepository): Response
+    public function photoAndVideo(MediaContentRepository $mediaContentRepository, MediaContentService $contentService): Response
     {
         $mediaContentItems = $mediaContentRepository->findActiveContentSortedByPosition();
+
+        $mediaContentItems = $contentService->sortMediaContentByPattern($mediaContentItems);
 
         return $this->render('site/app/photo_and_video.html.twig', [
             'mediaContentItems' => $mediaContentItems
