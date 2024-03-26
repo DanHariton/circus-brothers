@@ -29,13 +29,13 @@
             <div id="past-concerts" class="border-top-white pt-5">
                 {% for concert in pastConcerts %}
                     <div class="row mb-5 align-items-center past-concert-item" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-2 me-5 bg-shadow-concert text-center text-capitalize px-1 fw-bold mb-0 text-purple bg-white date-concert">
+                        <div class="col-8 col-sm-5 col-md-2 me-5 bg-shadow-concert text-center text-capitalize px-1 fw-bold mb-0 text-purple bg-white date-concert">
                             {{  concert.date|format_datetime(pattern="EEEE dd.MM.yy", locale='cs') }}
                         </div>
-                        <div class="color-shadow-concert col-6 text-uppercase h5 mb-0 fw-bold">
+                        <div class="color-shadow-concert col-12 col-md-6 text-uppercase h5 mb-0 fw-bold">
                             {{ concert.name }}
                         </div>
-                        <div class="color-shadow-concert col-2 helvetica-font">
+                        <div class="color-shadow-concert col-12 col-md-2 helvetica-font">
                             {{ concert.location }}
                         </div>
                     </div>
