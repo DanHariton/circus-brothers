@@ -23,14 +23,17 @@ class MerchFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Název',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
             ->add('price', IntegerType::class, [
+                'label' => 'Cena',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
             ->add('sizes', EntityType::class, [
+                'label' => 'Velikosti',
                 'class' => Size::class,
                 'choice_label' => 'name',
                 'multiple' => true,
@@ -41,6 +44,7 @@ class MerchFormType extends AbstractType
                 },
             ])
             ->add('images', FileType::class, [
+                'label' => 'Obrázky',
                 'required' => false,
                 'mapped' => false,
                 'multiple' => true,
@@ -59,18 +63,20 @@ class MerchFormType extends AbstractType
                 ]
             ])
             ->add('active', CheckboxType::class, [
+                'label' => 'Aktivní',
                 'attr' => [
                     'checked' => 'checked'
                 ],
             ])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'label' => 'Uložit',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Merch::class,
-            'translation_domain' => 'form_edit_merch',
             'selected_sizes' => [],
             'all_sizes' => [],
         ]);

@@ -5,15 +5,16 @@
 {% block body %}
     {% include 'site/app/_component/header.html.twig' %}
 
-    <main class="main-slider">
-        <div class="hero container d-flex justify-content-center align-items-center">
-            <div data-aos="zoom-out" data-aos-duration="1500">
-                <img class="logo-hp text-center" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
-            </div>
+    <div class="video-section">
+        <img class="logo-hp text-center" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="{{ asset('videos/slider.mp4') }}" type="video/mp4">
+            </video>
         </div>
-    </main>
+    </div>
 
-    <div class="container">
+    <div class="container px-4 px-xs-0">
         <div class="row my-5">
             <div class="col-12 col-md-8 mx-auto mt-4">
                 <p class="h5 mb-3 fw-bold text-center fest-text" data-aos="fade-up" data-aos-duration="1000">

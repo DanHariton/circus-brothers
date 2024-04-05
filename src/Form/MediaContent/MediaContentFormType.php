@@ -19,6 +19,7 @@ class MediaContentFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Název',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ]);
@@ -26,6 +27,7 @@ class MediaContentFormType extends AbstractType
         if ($options['photo_content'] == MediaContent::PHOTO || !$options['photo_content']) {
             $builder
                 ->add('image', FileType::class, [
+                    'label' => 'Obrázek',
                     'required' => false,
                     'mapped' => false,
                     'constraints' => [
@@ -39,6 +41,7 @@ class MediaContentFormType extends AbstractType
                     ],
                 ])
                 ->add('fullWidth', CheckboxType::class, [
+                    'label' => 'Na celou šířku',
                     'required' => false,
                 ]);
         }
@@ -46,23 +49,26 @@ class MediaContentFormType extends AbstractType
         if ($options['photo_content'] == MediaContent::VIDEO || !$options['photo_content']) {
             $builder
                 ->add('videoLink', TextType::class, [
+                    'label' => 'Odkaz na video',
                     'required' => false
                 ]);
         }
         $builder
             ->add('active', CheckboxType::class, [
+                'label' => 'Aktivní',
                 'attr' => [
                     'checked' => 'checked'
                 ],
             ])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'label' => 'Uložit',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => MediaContent::class,
-            'translation_domain' => 'form_media_content',
             'photo_content' => null
         ]);
     }

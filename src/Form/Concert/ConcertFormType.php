@@ -18,35 +18,41 @@ class ConcertFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Název',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
             ->add('date', DateType::class, [
+                'label' => 'Datum',
                 'required' => true,
                 'widget' => 'single_text',
                 'constraints' => [new NotBlank()]
             ])
             ->add('location', TextType::class, [
+                'label' => 'Místo konání',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
             ->add('tickets', TextType::class, [
+                'label' => 'Vstupenky',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
             ->add('active', CheckboxType::class, [
+                'label' => 'Aktivní',
                 'attr' => [
                     'checked' => 'checked'
                 ],
             ])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'label' => 'Uložit',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Concert::class,
-            'translation_domain' => 'form_edit_concert'
         ]);
     }
 }

@@ -16,17 +16,19 @@ class SizeFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Název',
                 'required' => true,
                 'constraints' => [new NotBlank()]
             ])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'label' => 'Uložit',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Size::class,
-            'translation_domain' => 'form_edit_size'
         ]);
     }
 }
