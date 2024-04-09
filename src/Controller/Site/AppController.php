@@ -9,24 +9,19 @@ use App\Repository\MerchRepository;
 use App\Service\MediaContent\MediaContentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route("/", name: "app_")]
 class AppController extends AbstractController
 {
-    private string $projectDir;
 
     public function __construct(
-        string $projectDir,
         private readonly ConcertRepository $concertRepository,
         private readonly MerchRepository $merchRepository
     )
     {
-        $this->projectDir = $projectDir;
     }
 
     #[Route("/", name: "index")]
@@ -90,13 +85,11 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[Route("/rider", name: "rider")]
-    public function rider(): BinaryFileResponse|Response
+    #[Route("/show-rider", name: "show_rider")]
+    public function showRider(): BinaryFileResponse|Response
     {
-        return $this->file(
-            new File("{$this->projectDir}/public/rider/RIDER.pdf"),
-            'RIDER - technicky.pdf',
-            ResponseHeaderBag::DISPOSITION_INLINE
-        );
+        $pdfPath = $this->getParameter('kernel.project_dir') . '/public/rider/RIDER.pdf';
+
+        return $this->file($pdfPath, 'RIDER - technicky.pdf', ResponseHeaderBag::DISPOSITION_INLINE);
     }
 }
