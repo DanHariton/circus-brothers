@@ -8,7 +8,11 @@ use App\Repository\MediaContentRepository;
 use App\Repository\MerchRepository;
 use App\Service\MediaContent\MediaContentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route("/", name: "app_")]
@@ -77,5 +81,15 @@ class AppController extends AbstractController
         return $this->render('site/app/photo_and_video.html.twig', [
             'mediaContentItems' => $mediaContentItems
         ]);
+    }
+
+    #[Route("/rider", name: "rider")]
+    public function rider(KernelInterface $appKernel): BinaryFileResponse
+    {
+        return $this->file(
+            new File("{$appKernel->getProjectDir()}/public/rider/RIDER.pdf"),
+            'RIDER - technicky.pdf',
+            ResponseHeaderBag::DISPOSITION_INLINE
+        );
     }
 }
