@@ -18,8 +18,15 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route("/", name: "app_")]
 class AppController extends AbstractController
 {
-    public function __construct(private readonly ConcertRepository $concertRepository, private readonly MerchRepository $merchRepository)
+    private string $projectDir;
+
+    public function __construct(
+        string $projectDir,
+        private readonly ConcertRepository $concertRepository,
+        private readonly MerchRepository $merchRepository
+    )
     {
+        $this->projectDir = $projectDir;
     }
 
     #[Route("/", name: "index")]
@@ -84,10 +91,10 @@ class AppController extends AbstractController
     }
 
     #[Route("/rider", name: "rider")]
-    public function rider(KernelInterface $appKernel): BinaryFileResponse
+    public function rider(): BinaryFileResponse|Response
     {
         return $this->file(
-            new File("{$appKernel->getProjectDir()}/public/rider/RIDER.pdf"),
+            new File("{$this->projectDir}/public/rider/RIDER.pdf"),
             'RIDER - technicky.pdf',
             ResponseHeaderBag::DISPOSITION_INLINE
         );
