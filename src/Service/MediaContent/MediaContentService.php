@@ -17,28 +17,9 @@ class MediaContentService
             }
         }
 
-        $sortedArray = [];
-        $currentBlock = 1;
-        $photoIndex = 1;
-        $videoIndex = 1;
-        while (!empty($photos) || !empty($videos)) {
-            if ($photoIndex <= 2 && !empty($photos)) {
-                $sortedArray[$currentBlock][] = array_shift($photos);
-                $photoIndex++;
-            } elseif ($videoIndex <= 1 && !empty($videos)) {
-                if ($photoIndex > 2) {
-                    $currentBlock++;
-                    $photoIndex = 1;
-                    $videoIndex = 1;
-                }
-                $sortedArray[$currentBlock][] = array_shift($videos);
-                $videoIndex++;
-            } else {
-                $currentBlock++;
-                $photoIndex = 1;
-                $videoIndex = 1;
-            }
-        }
-        return $sortedArray;
+        return [
+            'photos' => $photos,
+            'videos' => $videos
+        ];
     }
 }
