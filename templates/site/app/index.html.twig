@@ -1,7 +1,7 @@
 {% extends 'site/app_layout.html.twig' %}
 
-{% block meta_title %}Circus Brothers{% endblock %}
-{% block meta_keywords %}Circus Brothers, Kapela, Koncert, Party, Firemní večírek, Oslava, Festival, Circus, Šapitó, Zábava, Balkan, Bashavel{% endblock %}
+{% block meta_title %}Circus Brothers Official{% endblock %}
+{% block meta_keywords %}Circus Brothers, Circus Brothers Official, Kapela, Koncert, Party, Firemní večírek, Oslava, Festival, Circus, Šapitó, Zábava, Balkan, Bashavel{% endblock %}
 {% block meta_description %}Objevte Circus Brothers, dynamickou kapelu, která míchá balkánské rytmy s disco atmosférou pro nezapomenutelné koncerty, párty a festivaly. Ideální pro oslavy a firemní akce plné energie a tance.{% endblock %}
 {% block og_meta_title %}Circus Brothers: Balkánská Párty a Koncertní Extravaganza{% endblock %}
 {% block og_meta_description %}Připojte se k Circus Brothers pro nezapomenutelnou směs balkánských a disco rytmů, která oživí vaše večírky, firemní akce a festivaly s energií a tancem.{% endblock %}
@@ -11,12 +11,14 @@
 
     <div class="video-section">
         <img class="logo-hp text-center" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
-        <div class="video-container">
+        <canvas id="video-canvas" style="width: 100%; height: auto;"></canvas>
+        <div class="video-container" style="display: none;">
             <video id="banner-vid" autoplay loop preload="auto" no-controls playsinline muted>
-                <source src="{{ asset('videos/slider.mp4') }}" type="video/mp4">
+                <source src="{{ asset('videos/cb-slider.mp4') }}" type="video/mp4">
             </video>
         </div>
     </div>
+
 
     <div class="container px-4 px-xs-0">
         <div class="row my-5">
