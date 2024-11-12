@@ -29,7 +29,7 @@ class ConcertRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('c')
             ->andWhere('c.date >= :date')
-            ->setParameter('date', (new DateTime())->format('Y-m-d H:i:s'))
+            ->setParameter('date', (new DateTime())->format('Y-m-d'))
             ->orderBy('c.date', 'ASC');
 
         if (!is_null($count)) {

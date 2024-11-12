@@ -2,7 +2,6 @@
 
 namespace App\Controller\Site;
 
-use App\Entity\Merch;
 use App\Repository\ConcertRepository;
 use App\Repository\MediaContentRepository;
 use App\Repository\MerchRepository;
@@ -39,9 +38,7 @@ class AppController extends AbstractController
     #[Route("/merch", name: "merch")]
     public function merch(): Response
     {
-        return $this->render('site/app/merch.html.twig', [
-           'merchItems' => $this->merchRepository->findActiveMerch()
-        ]);
+        return $this->redirect('https://merch.circusbrothers.cz/');
     }
 
     #[Route("/contact", name: "contact")]
@@ -50,16 +47,16 @@ class AppController extends AbstractController
         return $this->render('site/app/contact.html.twig');
     }
 
-    #[Route("/merch/{merch}", name: "merch_detail")]
-    public function merchDetail(Merch $merch): Response
-    {
-        $merchItems = $this->merchRepository->findWithLimitCount(3, $merch->getId());
-
-        return $this->render('site/app/merch_detail.html.twig', [
-            'merch' => $merch,
-            'merchItems' => $merchItems
-        ]);
-    }
+//    #[Route("/merch/{merch}", name: "merch_detail")]
+//    public function merchDetail(Merch $merch): Response
+//    {
+//        $merchItems = $this->merchRepository->findWithLimitCount(3, $merch->getId());
+//
+//        return $this->render('site/app/merch_detail.html.twig', [
+//            'merch' => $merch,
+//            'merchItems' => $merchItems
+//        ]);
+//    }
 
     #[Route("/concerts", name: "concerts")]
     public function concerts(): Response

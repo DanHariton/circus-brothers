@@ -10,8 +10,13 @@
     {% include 'site/app/_component/header.html.twig' %}
 
     <div class="video-section">
-        <img class="logo-hp text-center d-none d-sm-block" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
-        <img id="banner-image" src="{{ asset('images/CB_header.webp') }}" alt="Circus Brother">
+        <img class="logo-hp text-center" src="{{ asset('images/logo/logo_white.webp') }}" alt="Circus Brother">
+        <canvas id="video-canvas" style="width: 100%; height: auto;"></canvas>
+        <div class="video-container" style="display: none;">
+            <video id="banner-vid" autoplay loop preload="auto" no-controls playsinline muted>
+                <source src="{{ asset('videos/CB.mov') }}" type="video/mp4">
+            </video>
+        </div>
     </div>
 
     <div class="container px-4 px-xs-0">
@@ -80,20 +85,20 @@
         </div>
     </div>
 
-    <div class="bg-purple grid-bg pt-5 pb-3">
-        <div class="container pt-5 my-4">
-            <div class="row">
-                {% for merch in merchItems %}
-                    <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">
-                        <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">
-                        <h4 class="fw-bold text-uppercase text-white mt-3 mt-md-5 mb-2">{{ merch.name }}</h4>
-                        <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
-                        <button class="text-white merch-button fw-bold">Prohlédnout</button>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+{#    <div class="bg-purple grid-bg pt-5 pb-3">#}
+{#        <div class="container pt-5 my-4">#}
+{#            <div class="row">#}
+{#                {% for merch in merchItems %}#}
+{#                    <a href="{{ path('app_merch_detail', {merch: merch.id}) }}" class="col-12 col-sm-6 col-lg-4 mb-5 text-center text-decoration-none merch-item" data-aos="fade-up" data-aos-duration="1000">#}
+{#                        <img class="w-100 rounded" src="{{ asset(imageAssets ~ merch.orderedImages|first.fileName) }}" alt="{{ merch.name }}">#}
+{#                        <h4 class="fw-bold text-uppercase text-white mt-3 mt-md-5 mb-2">{{ merch.name }}</h4>#}
+{#                        <p class="text-white mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>#}
+{#                        <button class="text-white merch-button fw-bold">Prohlédnout</button>#}
+{#                    </a>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
     {% include 'site/app/_component/footer.html.twig' %}
 {% endblock %}
