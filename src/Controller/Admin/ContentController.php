@@ -52,7 +52,7 @@ class ContentController extends AbstractController
 
             $mediaContentFile = $form->get('image')->getData();
 
-            $position = ($this->contentRepository->findLastPosition()?->getPosition() ?? 0) + 1;
+            $position = ($this->contentRepository->findLastPosition()?->getPosition() ?? 1) + 1;
             $mediaContent->setPosition($position);
 
             if ($mediaContentFile) {

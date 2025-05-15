@@ -41,4 +41,9 @@ class MerchService
 
         $this->em->flush();
     }
+
+    public function getLastPosition(): int
+    {
+        return ($this->merchRepository->findLastPosition()?->getPosition() ?? 1) + 1;
+    }
 }

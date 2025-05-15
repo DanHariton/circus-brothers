@@ -54,6 +54,7 @@ class MerchController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Merch $merch */
             $merch = $form->getData();
+            $merch->setPosition($this->merchService->getLastPosition());
 
             $images = $form->get('images')->getData();
             if (!empty($images)) {

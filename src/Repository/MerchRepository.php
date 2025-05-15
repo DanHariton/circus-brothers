@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\MediaContent;
 use App\Entity\Merch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -54,6 +55,16 @@ class MerchRepository extends ServiceEntityRepository
             ->orderBy('m.position', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findLastPosition(): ?Merch
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.position', 'desc')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
     }
 
     /**
