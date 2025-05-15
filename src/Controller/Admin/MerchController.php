@@ -112,7 +112,7 @@ class MerchController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', $this->translator->trans('flash.saved'));
 
-            return $this->redirectToRoute('merch_edit', ['merch' => $merch->getId()]);
+            return $this->redirectToRoute('merch_list');
         }
 
         return $this->render('admin/actions/merch/edit.html.twig', [

@@ -69,7 +69,7 @@ class ConcertController extends AbstractController
             $this->em->persist($concert);
             $this->em->flush();
 
-            return $this->redirectToRoute("concert_edit", ['concert' => $concert->getId()]);
+            return $this->redirectToRoute("concert_list");
         }
 
         return $this->render('admin/actions/concert/edit.html.twig', [

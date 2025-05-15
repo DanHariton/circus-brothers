@@ -66,7 +66,7 @@ class ContentController extends AbstractController
             $this->em->persist($mediaContent);
             $this->em->flush();
 
-            $this->addFlash('success', $this->translator->trans('flash.saved', [], 'mediaContent.flash.create'));
+            $this->addFlash('success', $this->translator->trans('flash.saved'));
             return $this->redirectToRoute('media_content_edit', ['mediaContent' => $mediaContent->getId()]);
         }
 
@@ -101,8 +101,8 @@ class ContentController extends AbstractController
             $this->em->persist($mediaContent);
             $this->em->flush();
 
-            $this->addFlash('success', $this->translator->trans('flash.saved', [], 'mediaContent.flash.edit'));
-            return $this->redirectToRoute('media_content_edit', ['mediaContent' => $mediaContent->getId()]);
+            $this->addFlash('success', $this->translator->trans('flash.saved'));
+            return $this->redirectToRoute('media_content_list');
         }
 
         return $this->render('admin/actions/mediaContent/edit.html.twig', [
@@ -121,7 +121,7 @@ class ContentController extends AbstractController
         $this->em->remove($mediaContent);
         $this->em->flush();
 
-        $this->addFlash('success', $this->translator->trans('flash.deleted', [], 'mediaContent.flash.delete'));
+        $this->addFlash('success', $this->translator->trans('flash.deleted'));
 
         return $this->redirectToRoute('media_content_list');
     }
@@ -142,7 +142,7 @@ class ContentController extends AbstractController
         $this->em->persist($mediaContent);
         $this->em->flush();
 
-        $this->addFlash('success', $this->translator->trans('flash.saved', [], 'mediaContent.flash.edit'));
+        $this->addFlash('success', $this->translator->trans('flash.saved'));
 
         return $this->redirectToRoute('media_content_list');
     }

@@ -16,6 +16,9 @@ class Size
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column]
+    private ?int $position = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -30,6 +33,17 @@ class Size
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): Size
+    {
+        $this->position = $position;
         return $this;
     }
 }

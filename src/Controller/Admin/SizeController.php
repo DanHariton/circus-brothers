@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Size;
 use App\Form\Size\SizeFormType;
 use App\Repository\SizeRepository;
+use App\Service\Size\SizeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route("/size", name: "size_")]
 class SizeController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SizeService $sizeService)
     {
     }
 
@@ -36,6 +37,7 @@ class SizeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Size $size */
             $size = $form->getData();
+            $size->setPosition($this->sizeService->getLastPosition());
 
             $this->em->persist($size);
             $this->em->flush();
@@ -76,5 +78,13 @@ class SizeController extends AbstractController
         $this->em->flush();
 
         return $this->redirectToRoute("size_list");
+    }
+
+    #[Route("/reposition/{size}/{way}", name: "reposition", requirements: ['direction' => 'up|down'])]
+    public function reposition(Size $size, string $way): RedirectResponse
+    {
+        $this->sizeService->reposition($size, $way === 'up' ? -1 : 1);
+
+        return $this->redirectToRoute('size_list');
     }
 }
