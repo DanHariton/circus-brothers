@@ -17,6 +17,8 @@
                     <thead>
                     <tr>
                         <th>{{ "size.table.name"|trans }}</th>
+                        <th>{{ "size.table.position"|trans }}</th>
+                        <th>{{ "size.table.reposition"|trans }}</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -24,6 +26,15 @@
                     {% for size in sizes %}
                         <tr>
                             <td>{{ size.name }}</td>
+                            <td>{{ size.position }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('size_reposition', {size: size.id, way: 'up'}) }}">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                </a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('size_reposition', {size: size.id, way: 'down'}) }}">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </a>
+                            </td>
                             <td>
                                 <a href="{{ path('size_edit', {'size': size.id}) }}" class="btn btn-primary btn-sm">{{ "size.button.edit"|trans }}</a>
                                 <a onclick="return confirm('Opravdu chcete smazat toto velikost?')"
