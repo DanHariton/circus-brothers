@@ -18,6 +18,7 @@
                     <tr>
                         <th>Název</th>
                         <th>Pořadí zobrazení</th>
+                        <th>Změna pořadí</th>
                         <th>Na celou šířku?</th>
                         <th>Aktivní?</th>
                         <th></th>
@@ -28,6 +29,16 @@
                         <tr>
                             <td>{{ item.name }}</td>
                             <td>{{ item.position }}</td>
+                            <td>
+                                {% if item.active %}
+                                    <a class="btn btn-sm btn-outline-secondary" href="{{ path('media_content_reposition', {mediaContent: item.id, way: 'up'}) }}">
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="{{ path('media_content_reposition', {mediaContent: item.id, way: 'down'}) }}">
+                                        <i class="fa-solid fa-arrow-down"></i>
+                                    </a>
+                                {% endif %}
+                            </td>
                             <td>{% if item.fullWidth %}Ano{% else %}Ne{% endif %}</td>
                             <td>{% if item.active %}Ano{% else %}Ne{% endif %}</td>
                             <td>

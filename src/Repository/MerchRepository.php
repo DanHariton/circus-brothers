@@ -37,7 +37,7 @@ class MerchRepository extends ServiceEntityRepository
         }
 
         return $query
-            ->orderBy('m.id', 'DESC')
+            ->orderBy('m.position', 'ASC')
             ->setMaxResults($count)
             ->getQuery()
             ->getResult();
@@ -51,8 +51,22 @@ class MerchRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('m')
             ->andWhere('m.active = :active')
             ->setParameter('active', Merch::STATUS_ACTIVE)
-            ->orderBy('m.id', 'desc')
+            ->orderBy('m.position', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @return Merch[]
+     */
+    public function findActiveSortedByPosition(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.active = :active')
+            ->setParameter('active', Merch::STATUS_ACTIVE)
+            ->orderBy('m.position', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

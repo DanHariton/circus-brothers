@@ -7,6 +7,7 @@ use App\Entity\MediaContent;
 use App\Form\MediaContent\MediaContentFormType;
 use App\Repository\MediaContentRepository;
 use App\Service\Image\ImageUploader;
+use App\Service\MediaContent\MediaContentService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,6 +24,7 @@ class ContentController extends AbstractController
         private readonly ImageUploader $imageUploader,
         private readonly MediaContentRepository $contentRepository,
         private readonly TranslatorInterface $translator,
+        private readonly MediaContentService $contentService,
     )
     {
     }
@@ -124,10 +126,12 @@ class ContentController extends AbstractController
         return $this->redirectToRoute('media_content_list');
     }
 
-    #[Route("/reposition/{mediaContent}/{way}", name: "reposition")]
+    #[Route("/reposition/{mediaContent}/{way}", name: "reposition", requirements: ['direction' => 'up|down'])]
     public function reposition(MediaContent $mediaContent, string $way): RedirectResponse
     {
-        return $this->redirectToRoute('media_content_edit', ['mediaContent' => $mediaContent->getId()]);
+        $this->contentService->reposition($mediaContent, $way === 'up' ? -1 : 1);
+
+        return $this->redirectToRoute('media_content_list');
     }
 
     #[Route("/toggle-status/{mediaContent}", name: "toggle_status")]

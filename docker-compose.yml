@@ -40,5 +40,11 @@ services:
     ports:
       - ${MYSQL_PORT}:3306
 
+  node:
+    container_name: circus-brothers_node
+    build: docker/node
+    volumes:
+      - './:/var/www/html/'
+
 volumes:
   mysql_app: {}

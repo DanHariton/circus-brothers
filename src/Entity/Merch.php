@@ -24,6 +24,9 @@ class Merch
     private ?int $price = null;
 
     #[ORM\Column]
+    private ?int $position = null;
+
+    #[ORM\Column]
     private ?bool $active = null;
 
     #[ORM\OneToMany(targetEntity: File::class, mappedBy: "merch")]
@@ -214,5 +217,15 @@ class Merch
                 }
             }
         }
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): void
+    {
+        $this->position = $position;
     }
 }

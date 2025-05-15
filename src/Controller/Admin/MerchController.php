@@ -3,11 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\File;
+use App\Entity\MediaContent;
 use App\Entity\Merch;
 use App\Form\Merch\MerchFormType;
 use App\Repository\MerchRepository;
 use App\Repository\SizeRepository;
 use App\Service\Image\ImageUploader;
+use App\Service\Merch\MerchService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +26,8 @@ class MerchController extends AbstractController
         private readonly EntityManagerInterface $em,
         private readonly ImageUploader $imageUploader,
         private readonly TranslatorInterface $translator,
-        private readonly SizeRepository $sizeRepository
+        private readonly SizeRepository $sizeRepository,
+        private readonly MerchService $merchService,
     )
     {}
 
@@ -67,7 +70,7 @@ class MerchController extends AbstractController
             $this->em->persist($merch);
             $this->em->flush();
 
-            $this->addFlash('success', $this->translator->trans('flash.saved', [], 'merch.flash.create'));
+            $this->addFlash('success', $this->translator->trans('flash.saved'));
             return $this->redirectToRoute('merch_list');
         }
 
@@ -106,7 +109,7 @@ class MerchController extends AbstractController
 
             $this->em->persist($merch);
             $this->em->flush();
-            $this->addFlash('success', $this->translator->trans('flash.saved', [], 'merch.flash.edit'));
+            $this->addFlash('success', $this->translator->trans('flash.saved'));
 
             return $this->redirectToRoute('merch_edit', ['merch' => $merch->getId()]);
         }
@@ -123,9 +126,17 @@ class MerchController extends AbstractController
         $merch->reposition($file, $way === 'top' ? 1 : -1);
 
         $this->em->flush();
-        $this->addFlash('success', $this->translator->trans('flash.saved', [], 'merch.flash.edit'));
+        $this->addFlash('success', $this->translator->trans('flash.saved'));
 
         return $this->redirectToRoute('merch_edit', ['merch' => $merch->getId()]);
+    }
+
+    #[Route("/reposition/{merch}/{way}", name: "reposition", requirements: ['direction' => 'up|down'])]
+    public function reposition(Merch $merch, string $way): RedirectResponse
+    {
+        $this->merchService->reposition($merch, $way === 'up' ? -1 : 1);
+
+        return $this->redirectToRoute('merch_list');
     }
 
     #[Route("/delete-photo/{merch}/{file}", name: "delete_photo")]
@@ -136,7 +147,7 @@ class MerchController extends AbstractController
         $this->em->remove($file);
         $this->em->flush();
 
-        $this->addFlash('success', $this->translator->trans('flash.deleted', [], 'merch.flash.delete_photo'));
+        $this->addFlash('success', $this->translator->trans('flash.deleted'));
 
         return $this->redirectToRoute('merch_edit', ['merch' => $merch->getId()]);
     }
@@ -149,7 +160,7 @@ class MerchController extends AbstractController
         $this->em->persist($merch);
         $this->em->flush();
 
-        $this->addFlash('success', $this->translator->trans('flash.saved', [], 'merch.flash.edit'));
+        $this->addFlash('success', $this->translator->trans('flash.saved'));
 
         return $this->redirectToRoute('merch_list');
     }
@@ -160,7 +171,7 @@ class MerchController extends AbstractController
         $this->em->remove($merch);
         $this->em->flush();
 
-        $this->addFlash('success', $this->translator->trans('flash.deleted', [], 'merch.flash.edit'));
+        $this->addFlash('success', $this->translator->trans('flash.deleted'));
 
         return $this->redirectToRoute('merch_list');
     }

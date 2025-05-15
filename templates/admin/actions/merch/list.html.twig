@@ -20,6 +20,8 @@
                         <th>{{ "merch.table.price"|trans }}</th>
                         <th>{{ "merch.table.size"|trans }}</th>
                         <th>{{ "merch.table.active"|trans }}</th>
+                        <th>{{ "merch.table.position"|trans }}</th>
+                        <th>{{ "merch.table.reposition"|trans }}</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -34,6 +36,17 @@
                                 {% endfor %}
                             </td>
                             <td>{% if merch.active %}{{ "merch.active"|trans }}{% else %}{{ "merch.not_active"|trans }}{% endif %}</td>
+                            <td>{{ merch.position }}</td>
+                            <td>
+                                {% if merch.active %}
+                                    <a class="btn btn-sm btn-outline-secondary" href="{{ path('merch_reposition', {merch: merch.id, way: 'up'}) }}">
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="{{ path('merch_reposition', {merch: merch.id, way: 'down'}) }}">
+                                        <i class="fa-solid fa-arrow-down"></i>
+                                    </a>
+                                {% endif %}
+                            </td>
                             <td>
                                 <a href="{{ path('merch_edit', {'merch': merch.id}) }}" class="btn btn-primary btn-sm">{{ "merch.button.edit"|trans }}</a>
                                 <a href="{{ path('merch_toggle_status', {'merch': merch.id}) }}" class="btn btn-info btn-sm">{{ "merch.button.toggle_status"|trans }}</a>
