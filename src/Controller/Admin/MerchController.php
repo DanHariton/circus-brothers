@@ -158,6 +158,12 @@ class MerchController extends AbstractController
     {
         $merch->setActive(!$merch->isActive());
 
+        if($merch->isActive()) {
+            $merch->setPosition($this->merchService->getLastPosition());
+        } else {
+            $merch->setPosition(0);
+        }
+
         $this->em->persist($merch);
         $this->em->flush();
 

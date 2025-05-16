@@ -36,24 +36,27 @@ class MediaContentService
     public function reposition(MediaContent $mediaContent, int $way): void
     {
         $orderedContents = $this->mediaContentRepository->findActiveContentSortedByPosition();
-        $currentPosition = $mediaContent->getPosition();
+        $contentList = array_values($orderedContents);
 
-        $targetPosition = $currentPosition + $way;
+        $currentIndex = array_search($mediaContent, $contentList, true);
 
-        if ($targetPosition < 1 || $targetPosition > count($orderedContents)) {
+        if ($currentIndex === false) {
             return;
         }
 
-        foreach ($orderedContents as $content) {
-            if ($content->getPosition() === $targetPosition) {
-                $content->setPosition($currentPosition);
-            }
+        $targetIndex = $currentIndex + $way;
+
+        if ($targetIndex < 0 || $targetIndex >= count($contentList)) {
+            return;
         }
 
-        $mediaContent->setPosition($targetPosition);
+        $temp = $contentList[$currentIndex];
+        $contentList[$currentIndex] = $contentList[$targetIndex];
+        $contentList[$targetIndex] = $temp;
 
-        foreach ($orderedContents as $content) {
-            $this->em->persist($content);
+        foreach ($contentList as $index => $item) {
+            $item->setPosition($index + 1);
+            $this->em->persist($item);
         }
 
         $this->em->flush();

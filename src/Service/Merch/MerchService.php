@@ -19,24 +19,26 @@ class MerchService
     public function reposition(Merch $merch, int $way): void
     {
         $orderedMerch = $this->merchRepository->findActiveSortedByPosition();
-        $currentPosition = $merch->getPosition();
+        $merchList = array_values($orderedMerch);
+        $currentIndex = array_search($merch, $merchList, true);
 
-        $targetPosition = $currentPosition + $way;
-
-        if ($targetPosition < 1 || $targetPosition > count($orderedMerch)) {
+        if ($currentIndex === false) {
             return;
         }
 
-        foreach ($orderedMerch as $content) {
-            if ($content->getPosition() === $targetPosition) {
-                $content->setPosition($currentPosition);
-            }
+        $targetIndex = $currentIndex + $way;
+
+        if ($targetIndex < 0 || $targetIndex >= count($merchList)) {
+            return;
         }
 
-        $merch->setPosition($targetPosition);
+        $tmp = $merchList[$currentIndex];
+        $merchList[$currentIndex] = $merchList[$targetIndex];
+        $merchList[$targetIndex] = $tmp;
 
-        foreach ($orderedMerch as $merchOrder) {
-            $this->em->persist($merchOrder);
+        foreach ($merchList as $index => $item) {
+            $item->setPosition($index + 1);
+            $this->em->persist($item);
         }
 
         $this->em->flush();
