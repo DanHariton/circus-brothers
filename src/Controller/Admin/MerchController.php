@@ -35,7 +35,7 @@ class MerchController extends AbstractController
     public function list(MerchRepository $merchRepository): Response
     {
         return $this->render('admin/actions/merch/list.html.twig', [
-            'merchs' => $merchRepository->findAll()
+            'merchs' => $merchRepository->findAllOrderedByPosition()
         ]);
     }
 

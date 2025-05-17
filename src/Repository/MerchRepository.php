@@ -22,6 +22,14 @@ class MerchRepository extends ServiceEntityRepository
         parent::__construct($registry, Merch::class);
     }
 
+    public function findAllOrderedByPosition(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.position', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @return Merch[]
      */

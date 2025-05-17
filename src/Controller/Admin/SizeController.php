@@ -24,7 +24,7 @@ class SizeController extends AbstractController
     public function list(SizeRepository $sizeRepository): Response
     {
         return $this->render('admin/actions/size/list.html.twig', [
-            'sizes' => $sizeRepository->findAll()
+            'sizes' => $sizeRepository->findAllOrderedByPosition()
         ]);
     }
 

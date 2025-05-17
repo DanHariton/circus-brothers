@@ -21,6 +21,14 @@ class SizeRepository extends ServiceEntityRepository
         parent::__construct($registry, Size::class);
     }
 
+    public function findAllOrderedByPosition(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.position', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findLastPosition(): ?Size
     {
         return $this->createQueryBuilder('s')
