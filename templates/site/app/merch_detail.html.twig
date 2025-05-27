@@ -40,7 +40,9 @@
                     </div>
                 {% endif %}
                 <p class="mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
-                <p class="mb-4 helvetica-font fw-bold">{{ merch.description }}</p>
+                {% if merch.description is not null %}
+                    <p class="mb-4 helvetica-font fw-bold">{{ merch.description }}</p>
+                {% endif %}
                 <p class="mb-0 helvetica-font">Pro objednání nás prosím kontaktuje na e-mail:</p>
                 <a class="text-dark helvetica-font" href="mailto:circusbrothersmerch@gmail.com">circusbrothersmerch@gmail.com</a>
             </div>
