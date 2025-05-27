@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,6 +43,13 @@ class MerchFormType extends AbstractType
                 'choice_attr' => function($choiceValue, $key, $value) use ($options) {
                     return in_array($value, $options['selected_sizes']) ? ['checked' => 'checked'] : [];
                 },
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Popis',
+                'required' => false,
+                'attr' => [
+                    'rows' => 3,
+                ],
             ])
             ->add('images', FileType::class, [
                 'label' => 'Obrázky',

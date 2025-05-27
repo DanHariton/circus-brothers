@@ -29,15 +29,18 @@
             </div>
             <div class="col-12 col-md-4 px-4 px-md-0 ms-0 ms-md-3 ms-lg-5 d-flex justify-content-center flex-column">
                 <p class="h5 fw-bold mb-4">{{ merch.name }}</p>
-                <p class="helvetica-font">Dostupné velikosti:</p>
-                <div class="d-flex mb-4">
-                    {% for size in merch.sizes %}
-                        <div class="me-2 size">
-                            {{ size.name }}
-                        </div>
-                    {% endfor %}
-                </div>
+                {% if merch.sizes|default([]) is not empty %}
+                    <p class="helvetica-font">Dostupné velikosti:</p>
+                    <div class="d-flex mb-4">
+                        {% for size in merch.sizes %}
+                            <div class="me-2 size">
+                                {{ size.name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <p class="mb-4 helvetica-font">{{ merch.price|format_currency('CZK', {fraction_digit: 0}, locale='cs_CZ') }}</p>
+                <p class="mb-4 helvetica-font fw-bold">{{ merch.description }}</p>
                 <p class="mb-0 helvetica-font">Pro objednání nás prosím kontaktuje na e-mail:</p>
                 <a class="text-dark helvetica-font" href="mailto:circusbrothersmerch@gmail.com">circusbrothersmerch@gmail.com</a>
             </div>

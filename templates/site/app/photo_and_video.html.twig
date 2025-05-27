@@ -15,9 +15,15 @@
         <h5 class="fw-bold text-center my-5">Fotografie</h5>
         <div class="row g-0">
             {% for photo in mediaContentItems['photos'] %}
-                <div class="col-lg-6 col-12">
-                    <img src="{{ asset(imageAssets ~ photo.photo.fileName) }}" alt="{{ photo.name }}" style="width: 100%; height: auto;">
-                </div>
+                {% if photo.fullWidth %}
+                    <div class="col-12 mb-4">
+                        <img src="{{ asset(imageAssets ~ photo.photo.fileName) }}" alt="{{ photo.name }}" style="width: 100%; height: auto;">
+                    </div>
+                {% else %}
+                    <div class="col-lg-6 col-12 mb-4">
+                        <img src="{{ asset(imageAssets ~ photo.photo.fileName) }}" alt="{{ photo.name }}" style="width: 100%; height: auto;">
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
         <h5 class="fw-bold text-center my-5">Videa</h5>

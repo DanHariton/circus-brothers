@@ -32,6 +32,9 @@ class Merch
     #[ORM\OneToMany(targetEntity: File::class, mappedBy: "merch")]
     private Collection $photos;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $description = null;
+
     #[ORM\JoinTable(name: 'merchs_sizes')]
     #[ORM\JoinColumn(name: 'merch_id', referencedColumnName: 'id', onDelete: "CASCADE")]
     #[ORM\InverseJoinColumn(name: 'size_id', referencedColumnName: 'id', onDelete: "CASCADE")]
@@ -227,5 +230,16 @@ class Merch
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): Merch
+    {
+        $this->description = $description;
+        return $this;
     }
 }
